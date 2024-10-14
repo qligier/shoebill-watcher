@@ -23,5 +23,6 @@ fs.mkdirSync('./dist');
 // 2. Run the build steps
 const cssBuildPromise = spawnProcess('npm', ['run', 'build-css']);
 const jsBuildPromise = spawnProcess('npm', ['run', 'build-js']);
+const jsCopyStatic = spawnProcess('npm', ['run', 'copy-static']);
 
-Promise.all([cssBuildPromise, jsBuildPromise]).then(() => {});
+Promise.all([cssBuildPromise, jsBuildPromise, jsCopyStatic]).then(() => {});

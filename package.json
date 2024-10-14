@@ -10,7 +10,8 @@
   "scripts": {
     "build": "node ./build.ts",
     "build-js": "tsc",
-    "build-css": "sass source/index.scss dist/style.css"
+    "build-css": "sass source/index.scss dist/style.css",
+    "copy-static":  "cp -R ./static/* ./dist"
   },
   "keywords": [],
   "author": {
@@ -22,5 +23,9 @@
     "sass-embedded": "^1.79.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
+  },
+  "exports": "./dist/index.js",
+  "imports": {
+    "#package.json": "./package.json"
   }
 }

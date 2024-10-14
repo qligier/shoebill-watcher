@@ -20,6 +20,11 @@
     <meta name="theme-color" content="#fafafa">
 </head>
 <body>
+<header>
+    <img src="shoebill.png" alt="Shoebill">
+    <h1>Shoebill watcher</h1>
+    <div id="shoebill-watcher">version</div>
+</header>
 
 <div id="log-wrapper"></div>
 
@@ -27,6 +32,15 @@
 </body>
 </html>
 
+<template id="log-day-template">
+    <div class="log-day-wrapper">
+        <div class="day">
+            <span class="date"></span>
+            <span class="day-name"></span>
+        </div>
+        <div class="logs"></div>
+    </div>
+</template>
 <template id="log-template">
 
 </template>

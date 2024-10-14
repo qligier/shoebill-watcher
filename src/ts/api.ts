@@ -1,4 +1,5 @@
 const logFileUrl = 'https://build.fhir.org/ig/qas.json';
+const igBuildRequestUrl = 'https://us-central1-fhir-org-starter-project.cloudfunctions.net/ig-commit-trigger';
 
 /**
  * The model this application will be using.
@@ -88,4 +89,16 @@ export async function fetchIgBuildLogs(): Promise<Array<IgBuildLog>> {
     // Sort by date descending
     logs.sort((a: IgBuildLog, b: IgBuildLog): number => b.date.getTime() - a.date.getTime());
     return logs;
+}
+
+export async function requestIgBuild(repoOwner: string, repoName: string, branch: string): Promise<void> {
+    await fetch(igBuildRequestUrl, {
+        method: "POST",
+        body: JSON.stringify({
+            ref: `refs/heads/${branch}`,
+            repository: {
+                full_name: `${repoOwner}/${repoName}`
+            }
+        })
+    });
 }
