@@ -1,4 +1,13 @@
-@import "sanitize.css";
+@import "sanitize";
 @import "colors";
 
+#main-width {
+  width: 80%;
+  min-width: 800px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
 @import "header";
+@import "logs";
+@import "footer";

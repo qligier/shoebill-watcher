@@ -20,27 +20,42 @@
     <meta name="theme-color" content="#fafafa">
 </head>
 <body>
-<header>
-    <img src="shoebill.png" alt="Shoebill">
-    <h1>Shoebill watcher</h1>
-    <div id="shoebill-watcher">version</div>
-</header>
+    <div id="main-width">
+        <header>
+            <img src="shoebill.png" alt="Shoebill"/>
+            <h1>Shoebill Watcher</h1>
+            <div id="shoebill-version" title="version">version</div>
+        </header>
 
-<div id="log-wrapper"></div>
+        <div id="log-wrapper"></div>
 
-<script src="app.js"></script>
+        <footer>
+            Built with 💙 in Switzerland by <a href="https://www.qligier.ch">Quentin Ligier</a>
+
+            The sources, license are available in the <a href="">GitHub repository</a>
+        </footer>
+    </div>
+
+    <template id="log-day-template">
+        <div class="log-day-wrapper">
+            <div class="day">
+                <div class="date"></div>
+                <div class="day-name"></div>
+            </div>
+            <div class="logs"></div>
+        </div>
+    </template>
+
+    <template id="log-template">
+        <div class="log">
+            <div class="status"> </div>
+            <div class="time"></div>
+            <div class="package-id"></div>
+            <div class="name"></div>
+            <div class="title"></div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
 </body>
 </html>
-
-<template id="log-day-template">
-    <div class="log-day-wrapper">
-        <div class="day">
-            <span class="date"></span>
-            <span class="day-name"></span>
-        </div>
-        <div class="logs"></div>
-    </div>
-</template>
-<template id="log-template">
-
-</template>

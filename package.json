@@ -8,10 +8,10 @@
     "url": "https://github.com/qligier/shoebill-watcher/issues"
   },
   "scripts": {
-    "build": "node ./build.ts",
-    "build-js": "tsc",
-    "build-css": "sass source/index.scss dist/style.css",
-    "copy-static":  "cp -R ./static/* ./dist"
+    "build": "node ./build.js",
+    "build-js": "tsc -noEmit && esbuild src/ts/index.ts --bundle --minify --tree-shaking=true --target=es2022 --outfile=dist/app.js",
+    "build-css": "sass --no-source-map --style=compressed --color src/scss/index.scss dist/style.css",
+    "copy-static": "cp -R ./static/* ./dist"
   },
   "keywords": [],
   "author": {
@@ -20,10 +20,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "esbuild": "0.24.0",
     "sass-embedded": "^1.79.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
+  "type": "module",
   "exports": "./dist/index.js",
   "imports": {
     "#package.json": "./package.json"

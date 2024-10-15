@@ -1,22 +1,42 @@
+import {Country, repoOwnersToCountries} from "./countries";
+
 const logFileUrl = 'https://build.fhir.org/ig/qas.json';
 const igBuildRequestUrl = 'https://us-central1-fhir-org-starter-project.cloudfunctions.net/ig-commit-trigger';
 
 /**
  * The model this application will be using.
  */
-export interface IgBuildLog {
-    name: string;
-    title: string;
-    description: string;
-    url: string;
-    packageId: string;
-    igVersion: string;
-    date: Date;
-    errorCount: number;
-    warningCount: number;
-    hintCount: number;
-    fhirVersion: string;
-    gitHubRepository: string;
+export class IgBuildLog {
+    constructor(public readonly name: string,
+                public readonly title: string,
+                public readonly description: string,
+                public readonly url: string,
+                public readonly packageId: string,
+                public readonly igVersion: string,
+                public readonly date: Date,
+                public readonly errorCount: number,
+                public readonly warningCount: number,
+                public readonly hintCount: number,
+                public readonly fhirVersion: string,
+                public readonly repositoryOwner: string,
+                public readonly repositoryName: string,
+                public readonly repositoryBranch: string) {
+    }
+
+    get repositoryUrl(): string {
+        return `https://github.com/${this.repositoryOwner}/${this.repositoryName}/branches/${this.repositoryBranch}`;
+    }
+
+    get country(): Country | undefined {
+        if (this.repositoryOwner in repoOwnersToCountries) {
+            return repoOwnersToCountries[this.repositoryOwner];
+        }
+        return undefined;
+    }
+
+    get buildStatus(): string {
+        return this.errorCount > 0 ? 'error' : 'success';
+    }
 }
 
 /**
@@ -68,22 +88,27 @@ interface ApiResponseItem {
 export async function fetchIgBuildLogs(): Promise<Array<IgBuildLog>> {
     const response: Response = await fetch(logFileUrl);
     const data: Array<ApiResponseItem> = await response.json();
+
     const logs = new Array<IgBuildLog>(data.length);
+    let i = 0;
     for (const row of data) {
-        logs.push({
-            name: row['name'] ?? '',
-            title: row['title'] ?? '',
-            description: row['description'] ?? '',
-            url: row['url'] ?? '',
-            packageId: row['package-id'] ?? '',
-            igVersion: row['ig-ver'] ?? '',
-            date: new Date(row['dateISO8601'] ?? ''),
-            errorCount: row['errs'] ?? 0,
-            warningCount: row['warnings'] ?? 0,
-            hintCount: row['hints'] ?? 0,
-            fhirVersion: row['version'] ?? '',
-            gitHubRepository: row['repo'] ?? '',
-        });
+        const repoParts = row['repo'].split('/');
+        logs[i++] = new IgBuildLog(
+            row['name'] ?? '',
+            row['title'] ?? '',
+            row['description'] ?? '',
+            row['url'] ?? '',
+            row['package-id'] ?? '',
+            row['ig-ver'] ?? '',
+            parseDate(row['date'] ?? '', row),
+            row['errs'] ?? 0,
+            row['warnings'] ?? 0,
+            row['hints'] ?? 0,
+            row['version'] ?? '',
+            repoParts[0]!,
+            repoParts[1]!,
+            repoParts[3]!,
+        );
     }
 
     // Sort by date descending
@@ -101,4 +126,13 @@ export async function requestIgBuild(repoOwner: string, repoName: string, branch
             }
         })
     });
+}
+
+const parseDate = (date: string, object: Object): Date => {
+    const timestamp = Date.parse(date);
+    if (isNaN(timestamp)) {
+        console.log(object);
+        throw new Error(`Invalid date: ${date}`);
+    }
+    return new Date(timestamp);
 }

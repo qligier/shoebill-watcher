@@ -1,0 +1,52 @@
+@import "colors";
+
+.log-day-wrapper {
+  $block-border-radius: 4px;
+
+  display: flex;
+  align-items: stretch; // Stretch the children to the same height
+  margin-bottom: 20px;
+
+  .day {
+    background: $Z10;
+    border-radius: $block-border-radius;
+    padding: 10px;
+    width: 10%;
+
+    .date {
+      color: $Z80;
+    }
+    .day-name {
+      color: $Z60;
+    }
+  }
+
+  .logs {
+    width: 90%;
+  }
+  .log {
+    border-radius: $block-border-radius;
+    border: 2px solid $Z20;
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    flex: 5;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .status {
+      border-radius: 2px;
+      width: 5px;
+      height: 100%;
+      &.success {
+        background: $G60;
+      }
+      &.error {
+        background: $B60;
+      }
+    }
+  }
+}
