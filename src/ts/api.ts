@@ -24,7 +24,7 @@ export class IgBuildLog {
     }
 
     get repositoryUrl(): string {
-        return `https://github.com/${this.repositoryOwner}/${this.repositoryName}/branches/${this.repositoryBranch}`;
+        return `https://github.com/${this.repositoryOwner}/${this.repositoryName}/tree/${this.repositoryBranch}`;
     }
 
     get country(): Country | undefined {
@@ -62,28 +62,6 @@ interface ApiResponseItem {
     maxMemory: number;
     repo: string;
 }
-/*
-{
-    "url": "https://interoperabilidad.minsal.cl/fhir/ig/nid/ImplementationGuide/hl7.fhir.cl.minsal.nid-mpi-hpd",
-    "name": "Nid_Mpi_Hpd_Minsal",
-    "title": "Núcleo de Interoperabilidad de Datos (NID) - MINSAL",
-    "description": "Núcleo de Interoperabilidad de Datos del Ministerio de Salud de Chile",
-    "status": "draft",
-    "package-id": "hl7.fhir.cl.minsal.nid-mpi-hpd",
-    "ig-ver": "0.4.0",
-    "date": "Tue, 08 Oct, 2024 13:08:18 +0000",
-    "dateISO8601": "2024-10-08T13:08:18+00:00",
-    "errs": 0,
-    "warnings": 3,
-    "hints": 8,
-    "suppressed-hints": 0,
-    "suppressed-warnings": 0,
-    "version": "4.0.1",
-    "tool": "5.0.0 (3)",
-    "maxMemory": 10091008952,
-    "repo": "Minsal-CL/NID/branches/master/qa.json"
-  }
- */
 
 export async function fetchIgBuildLogs(): Promise<Array<IgBuildLog>> {
     const response: Response = await fetch(logFileUrl);
@@ -128,7 +106,7 @@ export async function requestIgBuild(repoOwner: string, repoName: string, branch
     });
 }
 
-const parseDate = (date: string, object: Object): Date => {
+const parseDate = (date: string, object: object): Date => {
     const timestamp = Date.parse(date);
     if (isNaN(timestamp)) {
         console.log(object);

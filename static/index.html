@@ -2,60 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Shoebill – A watcher for FHIR IG auto-builds</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="Shoebill is a watcher for FHIR Implementation Guide auto-builds">
+    <link href="style.css" rel="stylesheet">
+    <meta content="Shoebill is a watcher for FHIR Implementation Guide auto-builds" name="description">
 
-    <meta property="og:title" content="Shoebill is a watcher for FHIR Implementation Guide auto-builds">
-    <meta property="og:type" content="">
-    <meta property="og:url" content="">
-    <meta property="og:image" content="">
-    <meta property="og:image:alt" content="">
+    <meta content="Shoebill is a watcher for FHIR Implementation Guide auto-builds" property="og:title">
+    <meta content="" property="og:type">
+    <meta content="" property="og:url">
+    <meta content="" property="og:image">
+    <meta content="" property="og:image:alt">
 
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" href="icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="icon.png">
+    <link href="favicon.ico" rel="icon" sizes="any">
+    <link href="icon.svg" rel="icon" type="image/svg+xml">
+    <link href="icon.png" rel="apple-touch-icon">
 
-    <meta name="theme-color" content="#fafafa">
+    <meta content="#fafafa" name="theme-color">
 </head>
 <body>
-    <div id="main-width">
-        <header>
-            <img src="shoebill.png" alt="Shoebill"/>
-            <h1>Shoebill Watcher</h1>
-            <div id="shoebill-version" title="version">version</div>
-        </header>
+<div id="main-width">
+    <header>
+        <img alt="Shoebill" src="shoebill.png"/>
+        <h1>Shoebill Watcher</h1>
+        <div id="shoebill-version" title="version">version</div>
+    </header>
 
-        <div id="log-wrapper"></div>
+    <div id="log-wrapper"></div>
 
-        <footer>
-            Built with 💙 in Switzerland by <a href="https://www.qligier.ch">Quentin Ligier</a>
+    <footer>
+        Built with 💙 in Switzerland by <a href="https://www.qligier.ch">Quentin Ligier</a>
 
-            The sources, license are available in the <a href="">GitHub repository</a>
-        </footer>
-    </div>
+        The sources, license are available in the <a href="">GitHub repository</a>, you can also report issues or propose new features there.
+    </footer>
+</div>
 
-    <template id="log-day-template">
-        <div class="log-day-wrapper">
-            <div class="day">
-                <div class="date"></div>
-                <div class="day-name"></div>
-            </div>
-            <div class="logs"></div>
+<template id="log-day-template">
+    <div class="log-day-wrapper">
+        <div class="day">
+            <div class="date"></div>
+            <div class="day-name"></div>
         </div>
-    </template>
+        <div class="logs"></div>
+    </div>
+</template>
 
-    <template id="log-template">
-        <div class="log">
+<template id="log-template">
+    <div class="log">
+        <div class="summary">
             <div class="status"> </div>
-            <div class="time"></div>
-            <div class="package-id"></div>
+            <div class="col1">
+                <div class="time"></div>
+            </div>
+            <div class="col2">
+                <div class="package-id"></div>
+                <a class="repository">
+                    <div class="country"></div>
+                    <span></span>/<span></span>
+                </a>
+            </div>
+            <div class="col3">
+                <div class="branch"></div>
+                <div class="fhir-version"></div>
+            </div>
+            <div class="actions">
+            </div>
+        </div>
+        <div class="details">
             <div class="name"></div>
             <div class="title"></div>
         </div>
-    </template>
+    </div>
+</template>
 
-    <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

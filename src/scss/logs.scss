@@ -1,8 +1,8 @@
 @import "colors";
 
-.log-day-wrapper {
-  $block-border-radius: 4px;
+$block-border-radius: 4px;
 
+.log-day-wrapper {
   display: flex;
   align-items: stretch; // Stretch the children to the same height
   margin-bottom: 20px;
@@ -24,23 +24,34 @@
   .logs {
     width: 90%;
   }
-  .log {
-    border-radius: $block-border-radius;
-    border: 2px solid $Z20;
-    display: flex;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    flex: 5;
+}
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+.log {
+  border-radius: $block-border-radius;
+  border: 2px solid $Z20;
+  display: flex;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  flex: 5;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .summary {
+    $intercol-space: 10px;
+
+    width: 100%;
+    display: flex;
+    align-items: stretch; // Stretch the children to the same height
+
 
     .status {
       border-radius: 2px;
       width: 5px;
       height: 100%;
+      margin-right: $intercol-space;
       &.success {
         background: $G60;
       }
@@ -48,5 +59,60 @@
         background: $B60;
       }
     }
+    .col1 {
+      width: 80px;
+      margin-right: $intercol-space;
+    }
+    .col2 {
+      flex: 3;
+      margin-right: $intercol-space;
+    }
+    .col3 {
+      width: 200px;
+      margin-right: $intercol-space;
+    }
+    .actions {
+      width: 50px;
+    }
+
+    .repository {
+      color: gray;
+      text-decoration: none;
+
+      .country {
+        width: 20px;
+        line-height: 11px;
+        margin-right: 4px;
+        display: inline-block;
+        border-radius: 2px;
+        overflow: hidden;
+
+        &:empty {
+          background: #eee;
+          height: 15px;
+        }
+        img {
+          width: 20px;
+          height: 15px;
+        }
+      }
+      span:first-child {
+        font-weight: bold;
+        margin-right: 4px;
+      }
+      span:nth-child(2) {
+        font-weight: bold;
+        margin-left: 4px;
+      }
+    }
+    .branch {
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+  .details {
+    display: none;
   }
 }
