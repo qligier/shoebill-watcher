@@ -7,5 +7,6 @@ export const dayNameFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 export const mediumDateFormatter = new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'medium',
+    month: 'short',
+    day: 'numeric',
 });

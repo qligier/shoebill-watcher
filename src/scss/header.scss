@@ -1,5 +1,25 @@
 @import "colors";
 
-#shoebill-version {
-  color: $Z40;
+header {
+  $logo-size: 80px;
+
+  line-height: $logo-size;
+
+  img {
+    width: $logo-size;
+    height: $logo-size;
+    border: 1px solid #ccc;
+    display: inline-block;
+  }
+  h1 {
+    display: inline-block;
+    margin-left: 20px;
+    color: $oc-blue-9;
+    font-weight: 800;
+  }
+  #shoebill-version {
+    color: $oc-gray-6;
+    margin-left: 10px;
+    font-size: 0.8rem;
+  }
 }

@@ -1,6 +1,11 @@
 @import "sanitize";
 @import "colors";
+@import "font";
 
+html {
+  font-size: 16px;
+  font-family: 'Assistant', sans-serif;
+}
 #main-width {
   width: 80%;
   min-width: 800px;

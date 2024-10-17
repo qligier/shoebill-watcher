@@ -22,9 +22,9 @@
 <body>
 <div id="main-width">
     <header>
-        <img alt="Shoebill" src="shoebill.png"/>
+        <img alt="Shoebill logo" src="shoebill.png"/>
         <h1>Shoebill Watcher</h1>
-        <div id="shoebill-version" title="version">version</div>
+        <span id="shoebill-version" title="version">version</span>
     </header>
 
     <div id="log-wrapper"></div>
@@ -50,26 +50,30 @@
     <div class="log">
         <div class="summary">
             <div class="status"> </div>
-            <div class="col1">
-                <div class="time"></div>
-            </div>
+            <div class="time"></div>
             <div class="col2">
-                <div class="package-id"></div>
-                <a class="repository">
+                <div class="package-id" title="ID of the ImplementationGuide"></div>
+                <a class="repository" title="Open the GitHub repository" target="_blank" rel="external noopener noreferrer nofollow">
                     <div class="country"></div>
                     <span></span>/<span></span>
                 </a>
             </div>
             <div class="col3">
-                <div class="branch"></div>
-                <div class="fhir-version"></div>
+                <div class="branch" title="Source branch of the built ImplementationGuide">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#git-merge"></use></svg>
+                </div>
+                <div class="ig-version" title="Version of the ImplementationGuide">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#tag"></use></svg>
+                </div>
             </div>
-            <div class="actions">
+            <div class="actions" title="Open/close the build details">
+                <svg class="icon switchy" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#chevron-right"></use></svg>
             </div>
         </div>
         <div class="details">
-            <div class="name"></div>
-            <div class="title"></div>
+            <div class="name" title="Name of the ImplementationGuide"></div>
+            <div class="title" title="title of the ImplementationGuide"></div>
+            <div class="fhir-version" title="FHIR version of the ImplementationGuide"></div>
         </div>
     </div>
 </template>

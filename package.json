@@ -11,7 +11,7 @@
     "build": "node ./build.js",
     "build-js": "tsc -noEmit && esbuild src/ts/index.ts --bundle --minify --tree-shaking=true --target=es2022 --outfile=dist/app.js",
     "build-css": "sass --no-source-map --style=compressed --color src/scss/index.scss dist/style.css",
-    "copy-static": "cp -R ./static/* ./dist"
+    "build-static": "cp -R ./static/* ./dist"
   },
   "author": {
     "name": "Quentin Ligier",

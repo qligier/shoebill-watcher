@@ -18,12 +18,15 @@ if (!domTemplateLog) {
 document.querySelector("#shoebill-version")!.textContent = packageJson.version;
 
 domNodeLogWrapper.addEventListener('click', (event: MouseEvent) => {
-    if (!(event.target instanceof HTMLElement)) {
+    if (event.target instanceof SVGElement) {
+        if (event.target.matches('.switchy')) {
+            // Toggle the details
+            event.target.closest('.log')!.classList.toggle('switchy-open');
+        }
         return;
     }
-    if (event.target.matches('.open-details')) {
-        // Toggle the details
-        // https://frontendmasters.com/blog/patterns-for-memory-efficient-dom-manipulation/#use-event-delegation-to-bind-fewer-events
+    if (event.target instanceof HTMLElement) {
+        return;
     }
 })
 
@@ -56,9 +59,10 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         const linkSpans = template.content.querySelectorAll('.repository span');
         linkSpans[0]!.textContent = log.repositoryOwner;
         linkSpans[1]!.textContent = log.repositoryName;
-        template.content.querySelector('.branch')!.textContent = log.repositoryBranch;
+        template.content.querySelector('.branch')!.appendChild(document.createTextNode(log.repositoryBranch));
         template.content.querySelector('.branch')!.setAttribute('title', log.repositoryBranch);
-        template.content.querySelector('.fhir-version')!.textContent = log.fhirVersion;
+        template.content.querySelector('.ig-version')!.appendChild(document.createTextNode(log.igVersion));
+        template.content.querySelector('.fhir-version')!.appendChild(document.createTextNode(log.fhirVersion));
 
         if (log.country) {
             const img = document.createElement('img');

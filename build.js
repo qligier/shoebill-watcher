@@ -24,6 +24,6 @@ fs.mkdirSync('./dist');
 const npmCommand = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
 const cssBuildPromise = spawnProcess(npmCommand, ['run', 'build-css']);
 const jsBuildPromise = spawnProcess(npmCommand, ['run', 'build-js']);
-const jsCopyStatic = spawnProcess(npmCommand, ['run', 'copy-static']);
+const jsCopyStatic = spawnProcess(npmCommand, ['run', 'build-static']);
 
 Promise.all([cssBuildPromise, jsBuildPromise, jsCopyStatic]).then(() => {});

@@ -1,6 +1,6 @@
 @import "colors";
 
-$block-border-radius: 4px;
+$block-border-radius: 10px;
 
 .log-day-wrapper {
   display: flex;
@@ -8,16 +8,21 @@ $block-border-radius: 4px;
   margin-bottom: 20px;
 
   .day {
-    background: $Z10;
+    background: $oc-gray-0;
     border-radius: $block-border-radius;
-    padding: 10px;
+    padding: 20px 0 0 20px;
     width: 10%;
 
     .date {
-      color: $Z80;
+      color: $oc-gray-8;
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1;
     }
     .day-name {
-      color: $Z60;
+      color: $oc-gray-5;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
   }
 
@@ -28,21 +33,31 @@ $block-border-radius: 4px;
 
 .log {
   border-radius: $block-border-radius;
-  border: 2px solid $Z20;
-  display: flex;
-  padding: 10px;
+  border: 2px solid $oc-gray-3;
+  padding: 15px;
   margin-bottom: 10px;
   margin-left: 20px;
   flex: 5;
 
+  transition: border-color 0.2s;
+
   &:last-child {
     margin-bottom: 0;
+  }
+  &:hover {
+    border-color: $oc-indigo-2;
+    .switchy {
+      color: $oc-blue-5;
+      background: $oc-gray-1;
+    }
   }
 
   .summary {
     $intercol-space: 10px;
+    $summary-height: 50px;
 
     width: 100%;
+    height: $summary-height;
     display: flex;
     align-items: stretch; // Stretch the children to the same height
 
@@ -50,58 +65,78 @@ $block-border-radius: 4px;
     .status {
       border-radius: 2px;
       width: 5px;
-      height: 100%;
       margin-right: $intercol-space;
+      user-select: none;
       &.success {
-        background: $G60;
+        background: $oc-green-7;
       }
       &.error {
-        background: $B60;
+        background: $oc-red-7;
       }
     }
-    .col1 {
-      width: 80px;
+    .time {
+      width: 100px;
       margin-right: $intercol-space;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: $oc-gray-5;
+      line-height: $summary-height;
+      letter-spacing: 1px;
     }
     .col2 {
       flex: 3;
       margin-right: $intercol-space;
+      line-height: 1.7;
     }
     .col3 {
-      width: 200px;
+      width: 250px;
       margin-right: $intercol-space;
+      line-height: 1.7;
+      color: $oc-gray-8;
+
+      .icon {
+        margin-right: 5px;
+        vertical-align: text-bottom;
+      }
     }
     .actions {
-      width: 50px;
+      width: $summary-height;
+
+      .switchy {
+        width: $summary-height;
+        height: $summary-height;
+        cursor: pointer;
+        stroke-width: 1;
+        transition: color 0.2s, background-color 0.2s;
+        border-radius: 6px;
+      }
     }
 
     .repository {
-      color: gray;
+      color: $oc-gray-7;
       text-decoration: none;
 
       .country {
         width: 20px;
-        line-height: 11px;
-        margin-right: 4px;
+        height: 15px;
+        margin-right: 6px;
         display: inline-block;
         border-radius: 2px;
         overflow: hidden;
-
-        &:empty {
-          background: #eee;
-          height: 15px;
-        }
+        background: $oc-gray-1;
+        vertical-align: middle;
+        position: relative;
+        top: -2px;
         img {
-          width: 20px;
-          height: 15px;
+          vertical-align: top;
         }
-      }
-      span:first-child {
-        font-weight: bold;
-        margin-right: 4px;
       }
       span:nth-child(2) {
-        font-weight: bold;
+        margin-right: 4px;
+      }
+      span:nth-child(3) {
+        font-weight: 600;
         margin-left: 4px;
       }
     }
@@ -112,7 +147,29 @@ $block-border-radius: 4px;
       white-space: nowrap;
     }
   }
+
   .details {
     display: none;
+    border-top: 1px solid $oc-gray-2;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    color: $oc-gray-3;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &.switchy-open {
+    .switchy {
+      rotate: 90deg;
+    }
+    .details {
+      display: block;
+    }
   }
 }
