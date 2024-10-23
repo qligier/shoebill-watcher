@@ -1,34 +1,51 @@
 import {domNodeNotifications, domTemplateNotification} from "./dom";
 
-export function notifyError(title: string, error: Error): void {
-    console.log(title);
-    console.error(error);
-    buildNotification(title, error.message, 'error');
+export function notifyError(title: string, error: Error | string): void {
+    if (typeof error === 'string') {
+        buildNotification(title, error, 'error');
+    } else {
+        buildNotification(title, error.message, 'error');
+    }
 }
 
-function buildNotification(title: string, message: string | undefined, type: string): void {
+export function notifyWarning(title: string, message: string): void {
+    buildNotification(title, message, 'warning');
+}
+
+export function notifyInfo(title: string, message: string): void {
+    buildNotification(title, message, 'info');
+}
+
+export function notifySuccess(title: string, message: string): void {
+    buildNotification(title, message, 'success');
+}
+
+type NotificationType = 'error' | 'warning' | 'info' | 'success';
+
+function buildNotification(title: string, message: string | undefined, type: NotificationType): void {
     const template = domTemplateNotification.cloneNode(true) as HTMLTemplateElement;
-    template.content.querySelector('.title')!.textContent += title;
+    template.content.querySelector('h4')!.appendChild(document.createTextNode(title));
     if (message) {
-        template.content.querySelector('.message')!.textContent = message;
+        template.content.querySelector('p')!.textContent = message;
     } else {
-        template.content.querySelector('.message')!.remove();
+        template.content.querySelector('p')!.remove();
     }
     template.content.querySelector('.notification')!.classList.add(type);
     template.content.querySelectorAll(`h4 svg:not(.${type})`).forEach(svg => svg.remove());
 
-    const delayedClose = window.setTimeout(() => {
-        template.content.querySelector('.notification')?.remove();
-    }, 10000);
+    // Insert the notification into the DOM
+    const notificationNode = template.content.querySelector('.notification') as HTMLElement;
+    domNodeNotifications.appendChild(notificationNode);
 
-    (template.content.querySelector('svg.close') as HTMLElement).addEventListener('click', (event: MouseEvent) => {
-        if (event.target instanceof HTMLElement) {
-            event.target?.closest('.notification')?.remove();
-        }
-        if (delayedClose) {
-            window.clearTimeout(delayedClose);
-        }
+    // Create a timer to automatically close the notification
+    const delayedClose: number | undefined = window.setTimeout(() => {
+        notificationNode.remove();
+    }, 10_000);
+
+    // Bind the close button to remove the notification
+    notificationNode.querySelector('svg.close')!.addEventListener('click', () => {
+        notificationNode.remove();
+        window.clearTimeout(delayedClose);
     });
 
-    domNodeNotifications.appendChild(template.content);
 }

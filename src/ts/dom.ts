@@ -1,6 +1,12 @@
 import {IgBuildLog, requestIgBuild} from "./api";
 import packageJson from '#package.json' assert {type: 'json'};
-import {dayNameFormatter, mediumDateFormatter, timeFormatter} from "./browser";
+import {
+    dayNameFormatter,
+    fullDateFormatter,
+    mediumDateFormatter,
+    mediumDateTimeFormatter,
+    timeFormatter
+} from "./utils";
 
 const domNodeLogWrapper: HTMLElement | null = document.getElementById("log-wrapper");
 const domTemplateLogDay: HTMLElement | null = document.getElementById("log-day-template");
@@ -35,8 +41,7 @@ domNodeLogWrapper.addEventListener('click', (event: MouseEvent) => {
         if (event.target.matches('.switchy')) {
             // Toggle the details
             event.target.closest('.log')!.classList.toggle('switchy-open');
-        }
-        if (event.target.matches('.request-rebuild svg')) {
+        } else if (event.target.matches('.request-rebuild svg')) {
             requestRebuild(event.target.closest('.log')!);
         }
         return;
@@ -55,12 +60,13 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
     for (const log of logs) {
         // Initialize the current day wrapper, if needed
         const logDay = mediumDateFormatter.format(log.date);
-        if (!currentDay?.equals(logDay)) {
+        if (currentDay === null || !currentDay.equals(logDay)) {
             if (currentDay !== null) {
                 fragment.appendChild(currentDay.fragment);
             }
             currentDay = new CurrentDay(logDay, domTemplateLogDay.cloneNode(true) as HTMLTemplateElement);
             currentDay.fragment.querySelector('.date')!.textContent = logDay;
+            currentDay.fragment.querySelector('.date')!.setAttribute('title', fullDateFormatter.format(log.date));
             currentDay.fragment.querySelector('.day-name')!.textContent = dayNameFormatter.format(log.date);
         }
 
@@ -70,6 +76,7 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         template.content.querySelector('.status')!.classList.add(log.buildStatus);
 
         template.content.querySelector('.time')!.textContent = timeFormatter.format(log.date);
+        template.content.querySelector('.time')!.setAttribute('title', mediumDateTimeFormatter.format(log.date));
         template.content.querySelector('.name')!.textContent = log.name;
         template.content.querySelector('.title')!.textContent = log.title;
         template.content.querySelector('.package-id')!.textContent = log.packageId;
@@ -78,18 +85,18 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         linkSpans[0]!.textContent = log.repositoryOwner;
         linkSpans[1]!.textContent = log.repositoryName;
         template.content.querySelector('.branch')!.appendChild(document.createTextNode(log.repositoryBranch));
-        template.content.querySelector('.branch')!.setAttribute('title', log.repositoryBranch);
+        template.content.querySelector('.branch')!.setAttribute('title', `Git branch: ${log.repositoryBranch}`);
         template.content.querySelector('.ig-version')!.appendChild(document.createTextNode(log.igVersion));
         template.content.querySelector('.fhir-version')!.appendChild(document.createTextNode(log.fhirVersion));
 
         if (log.buildStatus === 'error') {
             template.content.querySelector('.status')!.setAttribute('title', 'The build has failed');
-            template.content.querySelector('.link-failure-logs a')!.setAttribute('href', log.failureLogsUrl);
+            template.content.querySelector('.link-failure-logs')!.setAttribute('href', log.failureLogsUrl);
             template.content.querySelector('.link-preview')!.remove();
         } else {
             template.content.querySelector('.status')!.setAttribute('title', 'The build has succeeded');
             template.content.querySelector('.link-failure-logs')!.remove();
-            template.content.querySelector('.link-preview a')!.setAttribute('href', log.baseBuildUrl);
+            template.content.querySelector('.link-preview')!.setAttribute('href', log.baseBuildUrl);
         }
 
         if (log.country) {

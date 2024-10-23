@@ -1,0 +1,66 @@
+@import "colors";
+
+#new-build-request {
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  transition: height 0.2s, opacity 0.2s;
+  background: $oc-gray-1;
+  border-radius: 10px;
+  padding: 1em 1em 0 1em;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-bottom: 2em;
+
+  &.active {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .icon.close {
+    float: right;
+    color: $oc-gray-6;
+    width: 26px;
+    height: 26px;
+  }
+
+  h3 {
+    margin: 0 0 1em 0;
+    color: $oc-gray-8;
+  }
+
+  div {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 1em;
+    vertical-align: top;
+  }
+
+  label {
+    display: inline-block;
+    width: 160px;
+  }
+
+  input {
+    width: 280px;
+    background: #fff;
+    padding: 0.5em;
+    border-radius: 8px;
+    border: 1px solid $oc-gray-4;
+
+    &:focus {
+      outline: none;
+      border-color: $oc-blue-7;
+    }
+  }
+
+  span {
+    background: $oc-blue-8;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0.5em 1em;
+    line-height: 2.5em;
+  }
+}

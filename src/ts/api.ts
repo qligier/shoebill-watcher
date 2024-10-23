@@ -1,5 +1,6 @@
 import {Country, repoOwnersToCountries} from "./countries";
 import YAML from 'yaml';
+import {notifyError, notifySuccess} from "./notification";
 
 const qasFileUrl = 'https://build.fhir.org/ig/qas.json';
 const buildsFileUrl = 'https://build.fhir.org/ig/builds.json';
@@ -137,9 +138,9 @@ async function fetchFailedBuilds(): Promise<Array<IgBuildLog | undefined>> {
             return undefined;
         }
         const yamlFile = await response.text();
-        const yaml: SushiConfig = YAML.parse(yamlFile, { uniqueKeys: false, strict: false, stringKeys: true });
+        const yaml: SushiConfig = YAML.parse(yamlFile, {uniqueKeys: false, strict: false, stringKeys: true});
 
-        const [owner, repo, , branch, ] = ig.split('/');
+        const [owner, repo, , branch,] = ig.split('/');
         const lastModified = response.headers.get('last-modified')!;
 
         return new IgBuildLog(
@@ -164,9 +165,13 @@ async function fetchFailedBuilds(): Promise<Array<IgBuildLog | undefined>> {
     return Promise.all(promises);
 }
 
+// https://github.com/FHIR/auto-ig-builder
 export async function requestIgBuild(repoOwner: string, repoName: string, branch: string): Promise<void> {
-    await fetch(igBuildRequestUrl, {
+    const response = await fetch(igBuildRequestUrl, {
         method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             ref: `refs/heads/${branch}`,
             repository: {
@@ -174,6 +179,16 @@ export async function requestIgBuild(repoOwner: string, repoName: string, branch
             }
         })
     });
+    const json = await response.json();
+    if ('created' in json && !json['created']) {
+        if ('reason' in json) {
+            notifyError('Failed to request build', json['reason']);
+        } else {
+            notifyError('Failed to request build', 'An unknown error occurred.');
+        }
+        return;
+    }
+    notifySuccess('Build requested', `The build for ${repoOwner}/${repoName} on branch ${branch} has been requested.`);
 }
 
 const parseDate = (date: string): Date => {

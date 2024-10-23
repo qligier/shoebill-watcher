@@ -14,7 +14,22 @@ html {
   margin: 0 auto;
 }
 
+a,
+.clickable {
+  cursor: pointer;
+  text-decoration: underline #88aac9;
+  text-decoration-skip: leading-spaces trailing-spaces objects;
+}
+
+
+@media screen and (max-width: 1000px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 @import "header";
+@import "form";
 @import "logs";
 @import "footer";
 @import "notifications";

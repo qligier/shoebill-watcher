@@ -1,6 +1,6 @@
 {
   "name": "shoebill-watcher",
-  "version": "2024.10.14",
+  "version": "2024.11.03",
   "description": "A watcher for FHIR IG auto-builds",
   "private": true,
   "homepage": "https://github.com/qligier/shoebill-watcher",
@@ -11,7 +11,8 @@
     "build": "node ./build.js",
     "build-js": "tsc -noEmit && esbuild src/ts/app.ts --bundle --minify --tree-shaking=true --target=es2022 --outfile=dist/app.js",
     "build-css": "sass --no-source-map --style=compressed --color src/scss/index.scss dist/style.css",
-    "build-static": "cp -R ./static/* ./dist"
+    "build-static": "cp -R ./static/* ./dist",
+    "build-static:windows": "xcopy /E /Y /I static dist"
   },
   "author": {
     "name": "Quentin Ligier",
@@ -19,14 +20,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "^9.12.0",
+    "@eslint/js": "^9.14.0",
     "esbuild": "0.24.0",
-    "eslint": "^9.12.0",
+    "eslint": "^9.14.0",
     "globals": "^15.11.0",
-    "sass-embedded": "^1.79.5",
+    "sass-embedded": "^1.80.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.9.0"
+    "typescript-eslint": "^8.12.2"
   },
   "type": "module",
   "exports": "./dist/app.js",

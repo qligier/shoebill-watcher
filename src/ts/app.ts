@@ -1,6 +1,7 @@
 import {fetchIgBuildLogs, IgBuildLog} from "./api";
 import {domNodeDataRefresh, rebuildLogsInDom} from "./dom";
 import {notifyError} from "./notification";
+import {initRequestForm} from "./request-form";
 
 let allIgBuildLogs: Array<IgBuildLog> = [];
 let fetchingData: boolean = false;
@@ -25,13 +26,17 @@ const refreshLogs: () => Promise<void> = async () => {
         // Sort and filter if necessary
         rebuildLogsInDom(allIgBuildLogs);
     } catch (e: unknown) {
-        setFetchingData(false);
         if (e instanceof Error) {
             notifyError('Failed to fetch logs', e);
         }
         console.error(e);
+    } finally {
+        setFetchingData(false);
     }
 }
 
+initRequestForm();
+
 refreshLogs().then(() => {
 });
+document.getElementById('refresh-data')!.addEventListener('click', refreshLogs);

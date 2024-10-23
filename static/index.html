@@ -26,22 +26,58 @@
 <div id="main-width">
     <header>
         <div>
-            <span id="refresh-data">
-                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#refresh"></use></svg>
-                Refresh data
-            </span>
+            <span class="clickable" id="refresh-data" title="Refresh the build logs">
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#refresh"></use></svg><!--
+                -->Refresh data<!--
+            --></span>
+            |
+            <span class="clickable" id="request-new-build" title="Request the build from an IG">
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#square-rounded-plus"></use></svg><!--
+                -->Request a new build<!--
+            --></span>
         </div>
         <img alt="Shoebill logo" src="images/logo.svg"/>
         <h1>Shoebill Watcher</h1>
-        <span id="shoebill-version" title="version">version</span>
+        <span id="shoebill-version" title="version">Version of this application</span>
     </header>
+
+    <div id="new-build-request">
+        <svg class="icon close clickable" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>Close the request form</title>
+            <use xlink:href="images/icons.svg#x"></use>
+        </svg>
+        <h3>Request the build of an Implementation Guide</h3>
+        <div>
+            <label for="owner">User or organisation:</label>
+            <input id="owner" placeholder="Github user or organisation" type="text"/>
+        </div>
+        <div>
+            <label for="repo">Repository name:</label>
+            <input id="repo" list="known-repos" placeholder="Github repository" type="text"/>
+            <datalist id="known-repos"></datalist>
+        </div>
+        <div>
+            <label for="branch">Branch:</label>
+            <input id="branch" list="known-branches" placeholder="Name of the git branch" type="text"/>
+            <datalist id="known-branches"></datalist>
+        </div>
+        <div>
+            <span>Request build!</span>
+        </div>
+    </div>
 
     <div id="log-wrapper"></div>
 
     <footer>
-        Built with 💙 in Switzerland by <a href="https://www.qligier.ch">Quentin Ligier</a>
+        <p>
+            Built with 💙 in Switzerland by <a href="https://www.qligier.ch" rel="external noopener" target="_blank">Quentin Ligier</a>.
+        </p>
 
-        The sources, license are available in the <a href="">GitHub repository</a>, you can also report issues or propose new features there.
+        <p>
+            The sources, license are available in the
+            <a href="https://github.com/qligier/shoebill-watcher" rel="external noopener noreferrer nofollow" target="_blank">GitHub repository</a>,
+            you can also report issues or propose new features there.
+        </p>
     </footer>
 
     <div id="notifications"></div>
@@ -65,8 +101,8 @@
             <div class="col2">
                 <div class="package-id" title="ID of the ImplementationGuide"></div>
                 <a class="repository" rel="external noopener noreferrer nofollow" target="_blank" title="Open the GitHub repository">
-                    <div class="country"></div>
-                    <span></span>/<span></span>
+                    <div class="country"></div><!--
+                    --><span></span>/<span></span>
                 </a>
             </div>
             <div class="col3">
@@ -82,23 +118,23 @@
                 </div>
             </div>
             <div class="col4">
-                <div class="link-preview" title="Open the built ImplementationGuide">
+                <a class="link-preview" rel="external noopener noreferrer nofollow" target="_blank" title="Open the built ImplementationGuide">
                     <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <use xlink:href="images/icons.svg#eye"></use>
-                    </svg>
-                    <a rel="external noopener noreferrer nofollow" target="_blank">Preview</a>
-                </div>
-                <div class="link-failure-logs" title="Open the failure logs">
+                    </svg><!--
+                    -->Preview
+                </a>
+                <a class="link-failure-logs" rel="external noopener noreferrer nofollow" target="_blank" title="Open the failure logs">
                     <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <use xlink:href="images/icons.svg#notes"></use>
-                    </svg>
-                    <a rel="external noopener noreferrer nofollow" target="_blank">Failure logs</a>
-                </div>
-                <div class="request-rebuild" title="Request a rebuild of the ImplementationGuide">
+                    </svg><!--
+                    -->Failure logs
+                </a>
+                <div class="request-rebuild clickable" title="Request a rebuild of the ImplementationGuide">
                     <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <use xlink:href="images/icons.svg#refresh"></use>
-                    </svg>
-                    Rebuild
+                    </svg><!--
+                    -->Rebuild
                 </div>
             </div>
             <div class="actions" title="Open/close the build details">
@@ -126,14 +162,31 @@
 
 <template id="notification-template">
     <div class="notification">
-        <svg class="icon close" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <use xlink:href="images/icons.svg#alert"></use>
+        <svg class="icon close clickable" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>Close the notification</title>
+            <use xlink:href="images/icons.svg#x"></use>
         </svg>
-        <h3>
-            <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <use xlink:href="images/icons.svg#alert"></use>
-            </svg>
-        </h3>
+        <h4>
+            <svg class="icon info" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>Information</title>
+                <use xlink:href="images/icons.svg#info-circle"></use>
+            </svg><!--
+            -->
+            <svg class="icon warning" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>Warning</title>
+                <use xlink:href="images/icons.svg#alert-triangle"></use>
+            </svg><!--
+            -->
+            <svg class="icon error" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>Error</title>
+                <use xlink:href="images/icons.svg#alert-octagon"></use>
+            </svg><!--
+            -->
+            <svg class="icon success" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>Success</title>
+                <use xlink:href="images/icons.svg#rosette-discount-check"></use>
+            </svg><!--
+        --></h4>
         <p></p>
     </div>
 </template>

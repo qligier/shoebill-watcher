@@ -17,6 +17,11 @@ export enum Country {
     Sweden = 'se',
     Switzerland = 'ch',
     Vietnam = 'vn',
+
+    // Not countries, but useful nonetheless
+    Europe = 'eu',
+    Hl7 = 'hl7',
+    UnitedNations = 'un',
 }
 
 // The association map between repository owners and their respective countries.
@@ -41,10 +46,14 @@ export const repoOwnersToCountries: { [key: string]: Country } = {
 
     'TEHIK-EE': Country.Estonia,
 
+    'hl7-eu': Country.Europe,
+
     'fhir-fi': Country.Finland,
 
     'ansforge': Country.France,
     'Interop-Sante': Country.France,
+
+    'HL7': Country.Hl7,
 
     'hl7-it': Country.Italy,
 
@@ -62,6 +71,9 @@ export const repoOwnersToCountries: { [key: string]: Country } = {
 
     'hl7ch': Country.Switzerland,
     'ehealthsuisse': Country.Switzerland,
+
+    'PanAmericanHealthOrganization': Country.UnitedNations,
+    'WorldHealthOrganization': Country.UnitedNations,
 
     'hl7vn': Country.Vietnam,
 }

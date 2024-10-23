@@ -19,6 +19,7 @@ $block-border-radius: 10px;
       font-weight: 500;
       line-height: 1;
     }
+
     .day-name {
       color: $oc-gray-5;
       font-size: 1.2rem;
@@ -33,19 +34,22 @@ $block-border-radius: 10px;
 
 .log {
   border-radius: $block-border-radius;
-  border: 2px solid $oc-gray-3;
+  border: 1px solid $oc-gray-3;
   padding: 15px;
   margin-bottom: 10px;
   margin-left: 20px;
   flex: 5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   transition: border-color 0.2s;
 
   &:last-child {
     margin-bottom: 0;
   }
+
   &:hover {
-    border-color: $oc-indigo-2;
+    border-color: $oc-blue-2;
+
     .switchy {
       color: $oc-blue-5;
       background: $oc-gray-1;
@@ -67,15 +71,18 @@ $block-border-radius: 10px;
       width: 5px;
       margin-right: $intercol-space;
       user-select: none;
+
       &.success {
         background: $oc-green-7;
       }
+
       &.error {
         background: $oc-red-7;
       }
     }
+
     .time {
-      width: 100px;
+      width: 120px;
       margin-right: $intercol-space;
       text-align: center;
       font-weight: 800;
@@ -84,11 +91,13 @@ $block-border-radius: 10px;
       line-height: $summary-height;
       letter-spacing: 1px;
     }
+
     .col2 {
       flex: 3;
       margin-right: $intercol-space;
       line-height: 1.7;
     }
+
     .col3 {
       width: 270px;
       line-height: 1.7;
@@ -99,15 +108,18 @@ $block-border-radius: 10px;
         vertical-align: text-bottom;
       }
     }
+
     .col4 {
       width: 120px;
       line-height: 1.7;
       color: $oc-gray-8;
+
       .icon {
         margin-right: 5px;
         vertical-align: text-bottom;
       }
     }
+
     .actions {
       width: $summary-height;
 
@@ -123,7 +135,6 @@ $block-border-radius: 10px;
 
     .repository {
       color: $oc-gray-7;
-      text-decoration: none;
 
       .country {
         width: 20px;
@@ -136,23 +147,38 @@ $block-border-radius: 10px;
         vertical-align: middle;
         position: relative;
         top: -2px;
+
         img {
           vertical-align: top;
+          border: 1px solid $oc-gray-4;
+          border-radius: 2px;
         }
       }
+
       span:nth-child(2) {
         margin-right: 4px;
       }
+
       span:nth-child(3) {
         font-weight: 600;
         margin-left: 4px;
       }
     }
+
     .branch {
       max-width: 100%;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    }
+
+    .request-rebuild {
+      cursor: pointer;
+    }
+
+    .link-preview,
+    .link-failure-logs {
+      display: block;
     }
   }
 
@@ -176,8 +202,75 @@ $block-border-radius: 10px;
     .switchy {
       rotate: 90deg;
     }
+
     .details {
       display: block;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .log-day-wrapper {
+    margin-bottom: 10px;
+
+    .day {
+      padding: 12px 0 0 8px;
+
+      .date {
+        font-size: 1.5rem;
+      }
+
+      .day-name {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .log {
+    margin-left: 10px;
+    padding: 6px 8px;
+
+    .summary {
+      $summary-height: 40px;
+      height: $summary-height;
+
+      .time {
+        width: 80px;
+        line-height: $summary-height;
+        letter-spacing: revert;
+        font-weight: 700;
+      }
+
+      .col2 {
+        line-height: 1.5;
+      }
+
+      .col3 {
+        width: 170px;
+        line-height: 1.5;
+
+        .icon {
+          margin-right: 3px;
+        }
+      }
+
+      .col4 {
+        width: 95px;
+        line-height: 1.5;
+
+        .icon {
+          margin-right: 3px;
+        }
+      }
+
+      .actions {
+        width: 30px;
+
+        .switchy {
+          width: 30px;
+          height: 30px;
+          margin-top: 5px;
+        }
+      }
     }
   }
 }

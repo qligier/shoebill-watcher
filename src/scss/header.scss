@@ -4,12 +4,13 @@ header {
   $logo-size: 100px;
 
   line-height: $logo-size;
+  margin-bottom: 1em;
 
   img {
     width: $logo-size;
     height: $logo-size;
-    border: 1px solid #ccc;
     display: inline-block;
+    filter: drop-shadow(3px 4px 0px rgba(0, 0, 0, 0.1));
   }
 
   h1 {
@@ -27,27 +28,40 @@ header {
 
   div {
     float: right;
-    width: 400px;
+    color: $oc-gray-4;
+    user-select: none;
   }
 
-  #refresh-data {
-    svg {
-      width: 24px;
-      height: 24px;
-      color: $oc-gray-5;
-    }
+  #refresh-data,
+  #request-new-build {
+    color: $oc-gray-7;
+    margin: 0 1.2em;
 
-    &.active svg {
+    svg {
+      width: 26px;
+      height: 26px;
+      color: $oc-gray-5;
+      margin-right: 5px;
+      position: relative;
+      top: -1px;
+      stroke-width: 1.3px;
+    }
+  }
+
+  #refresh-data.active {
+    cursor: wait;
+
+    svg {
       animation-name: spin;
       animation-duration: 4000ms;
       animation-iteration-count: infinite;
       animation-timing-function: linear;
       @keyframes spin {
         from {
-          transform: rotate(0deg);
+          transform: rotate(360deg);
         }
         to {
-          transform: rotate(360deg);
+          transform: rotate(0deg);
         }
       }
     }

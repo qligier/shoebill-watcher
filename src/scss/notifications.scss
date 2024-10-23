@@ -5,55 +5,87 @@
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 150px;
+  width: 350px;
 }
 
 .notification {
-  border-left-width: 2px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  $icon-size: 22px;
+
+  border-style: solid;
+  border-width: 0 0 0 2px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 1em 1em 1em 0.4em;
+  margin-top: 1em;
 
   svg.close {
     float: right;
-    color: $oc-gray-5;
+    color: $oc-gray-6;
+    height: 26px;
+    width: 26px;
   }
 
   h4 {
+    margin-top: 0;
+    margin-bottom: 0.4em;
+
     svg {
-      width: 15px;
-      height: 15px;
-      margin-right: 15px;
+      width: $icon-size;
+      height: $icon-size;
+      margin-right: 0.4em;
     }
   }
 
   p {
-    margin-left: 30px;
+    margin: 0 0 0 calc(0.4em + #{$icon-size});
   }
 
   &.error {
     border-color: $oc-red-7;
-    background: $oc-red-0;
+    background: $oc-red-1;
 
-    h4 svg {
-      color: $oc-red-5;
+    h4 {
+      color: $oc-red-7;
+
+      svg {
+        color: $oc-red-5;
+      }
     }
   }
 
   &.success {
     border-color: $oc-green-5;
-    background: $oc-green-1;
+    background: $oc-green-0;
 
-    h4 svg {
-      color: $oc-green-6;
+    h4 {
+      color: $oc-green-8;
+      svg {
+        color: $oc-green-6;
+      }
     }
   }
 
   &.info {
     border-color: $oc-blue-8;
-    background: $oc-blue-2;
+    background: $oc-blue-0;
 
-    h4 svg {
-      color: $oc-blue-6;
+    h4 {
+      color: $oc-blue-8;
+      svg {
+        color: $oc-blue-6;
+      }
+    }
+  }
+
+  &.warning {
+    border-color: $oc-orange-6;
+    background: $oc-orange-0;
+
+    h4 {
+      color: $oc-orange-8;
+      svg {
+        color: $oc-yellow-6;
+      }
     }
   }
 }
