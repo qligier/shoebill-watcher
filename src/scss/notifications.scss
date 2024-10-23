@@ -1,0 +1,59 @@
+@import "colors";
+
+#notifications {
+  z-index: 10;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+}
+
+.notification {
+  border-left-width: 2px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  svg.close {
+    float: right;
+    color: $oc-gray-5;
+  }
+
+  h4 {
+    svg {
+      width: 15px;
+      height: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  p {
+    margin-left: 30px;
+  }
+
+  &.error {
+    border-color: $oc-red-7;
+    background: $oc-red-0;
+
+    h4 svg {
+      color: $oc-red-5;
+    }
+  }
+
+  &.success {
+    border-color: $oc-green-5;
+    background: $oc-green-1;
+
+    h4 svg {
+      color: $oc-green-6;
+    }
+  }
+
+  &.info {
+    border-color: $oc-blue-8;
+    background: $oc-blue-2;
+
+    h4 svg {
+      color: $oc-blue-6;
+    }
+  }
+}

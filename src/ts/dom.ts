@@ -5,6 +5,10 @@ import {dayNameFormatter, mediumDateFormatter, timeFormatter} from "./browser";
 const domNodeLogWrapper: HTMLElement | null = document.getElementById("log-wrapper");
 const domTemplateLogDay: HTMLElement | null = document.getElementById("log-day-template");
 const domTemplateLog: HTMLElement | null = document.getElementById("log-template");
+export const domNodeDataRefresh: HTMLElement = document.getElementById("refresh-data")!;
+export const domTemplateNotification: HTMLTemplateElement = document.getElementById("notification-template") as HTMLTemplateElement;
+export const domNodeNotifications: HTMLElement = document.getElementById("notifications")!;
+
 if (!domNodeLogWrapper) {
     throw new Error("Could not find the log wrapper element");
 }
@@ -22,7 +26,8 @@ const requestRebuild = (targetLog: HTMLElement): void => {
     if (!dataset["repoOwner"] || !dataset["repoName"] || !dataset["repoBranch"]) {
         throw new Error("Missing repository information");
     }
-    requestIgBuild(dataset["repoOwner"], dataset["repoName"], dataset["repoBranch"]).then(() => {});
+    requestIgBuild(dataset["repoOwner"], dataset["repoName"], dataset["repoBranch"]).then(() => {
+    });
 }
 
 domNodeLogWrapper.addEventListener('click', (event: MouseEvent) => {
@@ -90,7 +95,8 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         if (log.country) {
             const img = document.createElement('img');
             img.src = `images/flags/${log.country}.svg`;
-            img.alt = `Country: log.country`;
+            img.alt = `Country: ${log.country}`;
+            img.title = img.alt;
             template.content.querySelector('.country')!.appendChild(img);
         }
 

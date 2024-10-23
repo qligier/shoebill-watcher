@@ -11,15 +11,45 @@ header {
     border: 1px solid #ccc;
     display: inline-block;
   }
+
   h1 {
     display: inline-block;
     margin-left: 20px;
     color: $oc-blue-9;
     font-weight: 800;
   }
+
   #shoebill-version {
     color: $oc-gray-6;
     margin-left: 10px;
     font-size: 0.8rem;
+  }
+
+  div {
+    float: right;
+    width: 400px;
+  }
+
+  #refresh-data {
+    svg {
+      width: 24px;
+      height: 24px;
+      color: $oc-gray-5;
+    }
+
+    &.active svg {
+      animation-name: spin;
+      animation-duration: 4000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
 }

@@ -13,12 +13,12 @@
     <meta content="" property="og:image">
     <meta content="" property="og:image:alt">
 
-    <link rel="icon" type="image/png" href="images/favicon-48x48.png" sizes="48x48" />
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
-    <link rel="shortcut icon" href="images/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Shoebill Watcher" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link href="images/favicon-48x48.png" rel="icon" sizes="48x48" type="image/png"/>
+    <link href="images/favicon.svg" rel="icon" type="image/svg+xml"/>
+    <link href="images/favicon.ico" rel="shortcut icon"/>
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+    <meta content="Shoebill Watcher" name="apple-mobile-web-app-title"/>
+    <link href="/site.webmanifest" rel="manifest"/>
 
     <meta content="#fafafa" name="theme-color">
 </head>
@@ -43,6 +43,8 @@
 
         The sources, license are available in the <a href="">GitHub repository</a>, you can also report issues or propose new features there.
     </footer>
+
+    <div id="notifications"></div>
 </div>
 
 <template id="log-day-template">
@@ -62,47 +64,77 @@
             <div class="time"></div>
             <div class="col2">
                 <div class="package-id" title="ID of the ImplementationGuide"></div>
-                <a class="repository" title="Open the GitHub repository" target="_blank" rel="external noopener noreferrer nofollow">
+                <a class="repository" rel="external noopener noreferrer nofollow" target="_blank" title="Open the GitHub repository">
                     <div class="country"></div>
                     <span></span>/<span></span>
                 </a>
             </div>
             <div class="col3">
                 <div class="branch" title="Source branch of the built ImplementationGuide">
-                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#git-merge"></use></svg>
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#git-merge"></use>
+                    </svg>
                 </div>
                 <div class="ig-version" title="Version of the ImplementationGuide">
-                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#tag"></use></svg>
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#tag"></use>
+                    </svg>
                 </div>
             </div>
             <div class="col4">
                 <div class="link-preview" title="Open the built ImplementationGuide">
-                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#eye"></use></svg>
-                    <a target="_blank" rel="external noopener noreferrer nofollow">Preview</a>
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#eye"></use>
+                    </svg>
+                    <a rel="external noopener noreferrer nofollow" target="_blank">Preview</a>
                 </div>
                 <div class="link-failure-logs" title="Open the failure logs">
-                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#notes"></use></svg>
-                    <a target="_blank" rel="external noopener noreferrer nofollow">Failure logs</a>
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#notes"></use>
+                    </svg>
+                    <a rel="external noopener noreferrer nofollow" target="_blank">Failure logs</a>
                 </div>
                 <div class="request-rebuild" title="Request a rebuild of the ImplementationGuide">
-                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#refresh"></use></svg>
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#refresh"></use>
+                    </svg>
                     Rebuild
                 </div>
             </div>
             <div class="actions" title="Open/close the build details">
-                <svg class="icon switchy" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#chevron-right"></use></svg>
+                <svg class="icon switchy" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use xlink:href="images/icons.svg#chevron-right"></use>
+                </svg>
             </div>
         </div>
         <div class="details">
             <div class="name" title="Name of the ImplementationGuide"></div>
             <div class="title" title="title of the ImplementationGuide"></div>
             <div class="fhir-version" title="FHIR version of the ImplementationGuide">
-                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#flame"></use></svg>
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use xlink:href="images/icons.svg#flame"></use>
+                </svg>
             </div>
-            <a class="link-qa" title="Open the QA report" target="_blank" rel="external noopener noreferrer nofollow">
-                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#"></use></svg>
+            <a class="link-qa" rel="external noopener noreferrer nofollow" target="_blank" title="Open the QA report">
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <use xlink:href="images/icons.svg#"></use>
+                </svg>
             </a>
         </div>
+    </div>
+</template>
+
+<template id="notification-template">
+    <div class="notification">
+        <svg class="icon close" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <use xlink:href="images/icons.svg#alert"></use>
+        </svg>
+        <h3>
+            <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <use xlink:href="images/icons.svg#alert"></use>
+            </svg>
+        </h3>
+        <p></p>
     </div>
 </template>
 

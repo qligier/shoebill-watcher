@@ -1,5 +1,5 @@
 import {fetchIgBuildLogs, IgBuildLog} from "./api";
-import {rebuildLogsInDom} from "./dom";
+import {domNodeDataRefresh, rebuildLogsInDom} from "./dom";
 import {notifyError} from "./notification";
 
 let allIgBuildLogs: Array<IgBuildLog> = [];
@@ -7,7 +7,11 @@ let fetchingData: boolean = false;
 
 const setFetchingData = (value: boolean) => {
     fetchingData = value;
-    // TODO: update DOM to show/hide loading spinner
+    if (value) {
+        domNodeDataRefresh.classList.add('active');
+    } else {
+        domNodeDataRefresh.classList.remove('active');
+    }
 }
 
 const refreshLogs: () => Promise<void> = async () => {
@@ -23,10 +27,11 @@ const refreshLogs: () => Promise<void> = async () => {
     } catch (e: unknown) {
         setFetchingData(false);
         if (e instanceof Error) {
-            notifyError('Failed to fetch logs', e).then(() => {});
+            notifyError('Failed to fetch logs', e);
         }
         console.error(e);
     }
 }
 
-refreshLogs().then(() => {});
+refreshLogs().then(() => {
+});
