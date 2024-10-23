@@ -13,16 +13,25 @@
     <meta content="" property="og:image">
     <meta content="" property="og:image:alt">
 
-    <link href="favicon.ico" rel="icon" sizes="any">
-    <link href="icon.svg" rel="icon" type="image/svg+xml">
-    <link href="icon.png" rel="apple-touch-icon">
+    <link rel="icon" type="image/png" href="images/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Shoebill Watcher" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta content="#fafafa" name="theme-color">
 </head>
 <body>
 <div id="main-width">
     <header>
-        <img alt="Shoebill logo" src="shoebill.png"/>
+        <div>
+            <span id="refresh-data">
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#refresh"></use></svg>
+                Refresh data
+            </span>
+        </div>
+        <img alt="Shoebill logo" src="images/logo.svg"/>
         <h1>Shoebill Watcher</h1>
         <span id="shoebill-version" title="version">version</span>
     </header>
@@ -66,6 +75,20 @@
                     <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#tag"></use></svg>
                 </div>
             </div>
+            <div class="col4">
+                <div class="link-preview" title="Open the built ImplementationGuide">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#eye"></use></svg>
+                    <a target="_blank" rel="external noopener noreferrer nofollow">Preview</a>
+                </div>
+                <div class="link-failure-logs" title="Open the failure logs">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#notes"></use></svg>
+                    <a target="_blank" rel="external noopener noreferrer nofollow">Failure logs</a>
+                </div>
+                <div class="request-rebuild" title="Request a rebuild of the ImplementationGuide">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#refresh"></use></svg>
+                    Rebuild
+                </div>
+            </div>
             <div class="actions" title="Open/close the build details">
                 <svg class="icon switchy" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#chevron-right"></use></svg>
             </div>
@@ -73,7 +96,12 @@
         <div class="details">
             <div class="name" title="Name of the ImplementationGuide"></div>
             <div class="title" title="title of the ImplementationGuide"></div>
-            <div class="fhir-version" title="FHIR version of the ImplementationGuide"></div>
+            <div class="fhir-version" title="FHIR version of the ImplementationGuide">
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#flame"></use></svg>
+            </div>
+            <a class="link-qa" title="Open the QA report" target="_blank" rel="external noopener noreferrer nofollow">
+                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink"><use xlink:href="images/icons.svg#"></use></svg>
+            </a>
         </div>
     </div>
 </template>

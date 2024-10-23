@@ -1,8 +1,11 @@
 {
   "files": [
-    "./src/ts/index.ts",
+    "./src/ts/app.ts",
     "./src/ts/api.ts",
-    "./src/ts/dom.ts"
+    "./src/ts/dom.ts",
+    "./src/ts/browser.ts",
+    "./src/ts/countries.ts",
+    "./src/ts/notification.ts",
   ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */

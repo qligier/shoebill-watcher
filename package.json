@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "node ./build.js",
-    "build-js": "tsc -noEmit && esbuild src/ts/index.ts --bundle --minify --tree-shaking=true --target=es2022 --outfile=dist/app.js",
+    "build-js": "tsc -noEmit && esbuild src/ts/app.ts --bundle --minify --tree-shaking=true --target=es2022 --outfile=dist/app.js",
     "build-css": "sass --no-source-map --style=compressed --color src/scss/index.scss dist/style.css",
     "build-static": "cp -R ./static/* ./dist"
   },
@@ -29,8 +29,11 @@
     "typescript-eslint": "^8.9.0"
   },
   "type": "module",
-  "exports": "./dist/index.js",
+  "exports": "./dist/app.js",
   "imports": {
     "#package.json": "./package.json"
+  },
+  "dependencies": {
+    "yaml": "^2.6.0"
   }
 }

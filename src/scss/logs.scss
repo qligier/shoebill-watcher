@@ -90,11 +90,19 @@ $block-border-radius: 10px;
       line-height: 1.7;
     }
     .col3 {
-      width: 250px;
-      margin-right: $intercol-space;
+      width: 270px;
       line-height: 1.7;
       color: $oc-gray-8;
 
+      .icon {
+        margin-right: 5px;
+        vertical-align: text-bottom;
+      }
+    }
+    .col4 {
+      width: 120px;
+      line-height: 1.7;
+      color: $oc-gray-8;
       .icon {
         margin-right: 5px;
         vertical-align: text-bottom;

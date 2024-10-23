@@ -16,4 +16,29 @@
     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
     <path d="M9 6l6 6l-6 6" />
   </symbol>
+  <symbol id="flame" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" />
+  </symbol>
+  <symbol id="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+  </symbol>
+  <symbol id="notes" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+    <path d="M9 7l6 0" />
+    <path d="M9 11l6 0" />
+    <path d="M9 15l4 0" />
+  </symbol>
+  <symbol id="refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+  </symbol>
+
+  <symbol id="" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /><path d="M12 16h.01" />
+  </symbol>
 </svg>

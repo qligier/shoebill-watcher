@@ -1,4 +1,4 @@
-import {IgBuildLog} from "./api";
+import {IgBuildLog, requestIgBuild} from "./api";
 import packageJson from '#package.json' assert {type: 'json'};
 import {dayNameFormatter, mediumDateFormatter, timeFormatter} from "./browser";
 
@@ -17,18 +17,31 @@ if (!domTemplateLog) {
 
 document.querySelector("#shoebill-version")!.textContent = packageJson.version;
 
+const requestRebuild = (targetLog: HTMLElement): void => {
+    const dataset = targetLog.dataset;
+    if (!dataset["repoOwner"] || !dataset["repoName"] || !dataset["repoBranch"]) {
+        throw new Error("Missing repository information");
+    }
+    requestIgBuild(dataset["repoOwner"], dataset["repoName"], dataset["repoBranch"]).then(() => {});
+}
+
 domNodeLogWrapper.addEventListener('click', (event: MouseEvent) => {
     if (event.target instanceof SVGElement) {
         if (event.target.matches('.switchy')) {
             // Toggle the details
             event.target.closest('.log')!.classList.toggle('switchy-open');
         }
+        if (event.target.matches('.request-rebuild svg')) {
+            requestRebuild(event.target.closest('.log')!);
+        }
         return;
     }
     if (event.target instanceof HTMLElement) {
-        return;
+        if (event.target.matches('.request-rebuild')) {
+            requestRebuild(event.target.closest('.log')!);
+        }
     }
-})
+});
 
 export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
     const fragment = document.createDocumentFragment();
@@ -50,7 +63,7 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         const template = domTemplateLog.cloneNode(true) as HTMLTemplateElement;
 
         template.content.querySelector('.status')!.classList.add(log.buildStatus);
-        template.content.querySelector('.status')!.setAttribute('title', log.buildStatus === 'error' ? 'Error' : 'Success');
+
         template.content.querySelector('.time')!.textContent = timeFormatter.format(log.date);
         template.content.querySelector('.name')!.textContent = log.name;
         template.content.querySelector('.title')!.textContent = log.title;
@@ -64,12 +77,27 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         template.content.querySelector('.ig-version')!.appendChild(document.createTextNode(log.igVersion));
         template.content.querySelector('.fhir-version')!.appendChild(document.createTextNode(log.fhirVersion));
 
+        if (log.buildStatus === 'error') {
+            template.content.querySelector('.status')!.setAttribute('title', 'The build has failed');
+            template.content.querySelector('.link-failure-logs a')!.setAttribute('href', log.failureLogsUrl);
+            template.content.querySelector('.link-preview')!.remove();
+        } else {
+            template.content.querySelector('.status')!.setAttribute('title', 'The build has succeeded');
+            template.content.querySelector('.link-failure-logs')!.remove();
+            template.content.querySelector('.link-preview a')!.setAttribute('href', log.baseBuildUrl);
+        }
+
         if (log.country) {
             const img = document.createElement('img');
             img.src = `images/flags/${log.country}.svg`;
             img.alt = `Country: log.country`;
             template.content.querySelector('.country')!.appendChild(img);
         }
+
+        const dataset = (template.content.querySelector('.log') as HTMLElement).dataset;
+        dataset['repoOwner'] = log.repositoryOwner;
+        dataset['repoName'] = log.repositoryName;
+        dataset['repoBranch'] = log.repositoryBranch;
 
         currentDay.appendChild(template.content);
     }
