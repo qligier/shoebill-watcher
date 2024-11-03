@@ -1,4 +1,4 @@
-@import "colors";
+@use "colors";
 
 #notifications {
   z-index: 10;
@@ -20,7 +20,7 @@
 
   svg.close {
     float: right;
-    color: $oc-gray-6;
+    color: colors.$oc-gray-6;
     height: 26px;
     width: 26px;
   }
@@ -41,50 +41,53 @@
   }
 
   &.error {
-    border-color: $oc-red-7;
-    background: $oc-red-1;
+    border-color: colors.$oc-red-7;
+    background: colors.$oc-red-1;
 
     h4 {
-      color: $oc-red-7;
+      color: colors.$oc-red-7;
 
       svg {
-        color: $oc-red-5;
+        color: colors.$oc-red-5;
       }
     }
   }
 
   &.success {
-    border-color: $oc-green-5;
-    background: $oc-green-0;
+    border-color: colors.$oc-green-5;
+    background: colors.$oc-green-0;
 
     h4 {
-      color: $oc-green-8;
+      color: colors.$oc-green-8;
+
       svg {
-        color: $oc-green-6;
+        color: colors.$oc-green-6;
       }
     }
   }
 
   &.info {
-    border-color: $oc-blue-8;
-    background: $oc-blue-0;
+    border-color: colors.$oc-blue-8;
+    background: colors.$oc-blue-0;
 
     h4 {
-      color: $oc-blue-8;
+      color: colors.$oc-blue-8;
+
       svg {
-        color: $oc-blue-6;
+        color: colors.$oc-blue-6;
       }
     }
   }
 
   &.warning {
-    border-color: $oc-orange-6;
-    background: $oc-orange-0;
+    border-color: colors.$oc-orange-6;
+    background: colors.$oc-orange-0;
 
     h4 {
-      color: $oc-orange-8;
+      color: colors.$oc-orange-8;
+
       svg {
-        color: $oc-yellow-6;
+        color: colors.$oc-yellow-6;
       }
     }
   }

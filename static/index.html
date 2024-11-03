@@ -144,18 +144,37 @@
             </div>
         </div>
         <div class="details">
-            <div class="name" title="Name of the ImplementationGuide"></div>
-            <div class="title" title="title of the ImplementationGuide"></div>
-            <div class="fhir-version" title="FHIR version of the ImplementationGuide">
-                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <use xlink:href="images/icons.svg#flame"></use>
-                </svg>
+            <div class="col1">
+                <div class="name" title="Name of the ImplementationGuide">Name: <span></span></div>
+                <div class="title" title="Title of the ImplementationGuide">Title: <span></span></div>
+                <div class="url" title="URL of the ImplementationGuide">
+                    URL:
+                    <a class="clickable" rel="external noopener noreferrer nofollow" target="_blank"></a>
+                </div>
             </div>
-            <a class="link-qa" rel="external noopener noreferrer nofollow" target="_blank" title="Open the QA report">
-                <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <use xlink:href="images/icons.svg#"></use>
-                </svg>
-            </a>
+            <div class="col2">
+                <div class="fhir-version" title="FHIR version of the ImplementationGuide">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#flame"></use>
+                    </svg>
+                </div>
+                <div class="error-count" title="Number of errors">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#alert-octagon"></use>
+                    </svg>
+                </div>
+                <div class="warning-count" title="Number of warnings">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#alert-triangle"></use>
+                    </svg>
+                </div>
+                <a class="link-qa" rel="external noopener noreferrer nofollow" target="_blank" title="Open the QA report">
+                    <svg class="icon" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="images/icons.svg#clipboard-text"></use>
+                    </svg><!--
+                    -->QA report
+                </a>
+            </div>
         </div>
     </div>
 </template>

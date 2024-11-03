@@ -1,4 +1,5 @@
-@import "colors";
+@use "colors";
+@use "utils";
 
 $block-border-radius: 10px;
 
@@ -8,20 +9,20 @@ $block-border-radius: 10px;
   margin-bottom: 20px;
 
   .day {
-    background: $oc-gray-0;
+    background: colors.$oc-gray-0;
     border-radius: $block-border-radius;
     padding: 20px 0 0 20px;
     width: 10%;
 
     .date {
-      color: $oc-gray-8;
+      color: colors.$oc-gray-8;
       font-size: 1.5rem;
       font-weight: 500;
       line-height: 1;
     }
 
     .day-name {
-      color: $oc-gray-5;
+      color: colors.$oc-gray-5;
       font-size: 1.2rem;
       font-weight: 600;
     }
@@ -34,31 +35,38 @@ $block-border-radius: 10px;
 
 .log {
   border-radius: $block-border-radius;
-  border: 1px solid $oc-gray-3;
+  border: 1px solid colors.$oc-gray-3;
   padding: 15px;
   margin-bottom: 10px;
   margin-left: 20px;
   flex: 5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, color 0.2s;
 
   &:last-child {
     margin-bottom: 0;
   }
 
   &:hover {
-    border-color: $oc-blue-2;
+    border-color: colors.$oc-blue-2;
 
     .switchy {
-      color: $oc-blue-5;
-      background: $oc-gray-1;
+      color: colors.$oc-blue-5;
+      background: colors.$oc-gray-1;
     }
   }
 
   .summary {
     $intercol-space: 10px;
     $summary-height: 50px;
+
+    $status-width: 5px;
+    $time-width: 120px;
+    $col2-width: 1fr;
+    $col3-width: 270px;
+    $col4-width: 120px;
+    $actions-width: $summary-height;
 
     width: 100%;
     height: $summary-height;
@@ -68,40 +76,43 @@ $block-border-radius: 10px;
 
     .status {
       border-radius: 2px;
-      width: 5px;
+      width: $status-width;
       margin-right: $intercol-space;
       user-select: none;
 
       &.success {
-        background: $oc-green-7;
+        background: colors.$oc-green-7;
       }
 
       &.error {
-        background: $oc-red-7;
+        background: colors.$oc-red-7;
       }
     }
 
     .time {
-      width: 120px;
+      width: $time-width;
+      min-width: $time-width;
       margin-right: $intercol-space;
       text-align: center;
       font-weight: 800;
       font-size: 1.5rem;
-      color: $oc-gray-5;
+      color: colors.$oc-gray-5;
       line-height: $summary-height;
       letter-spacing: 1px;
     }
 
     .col2 {
-      flex: 3;
+      flex: 1 1;
       margin-right: $intercol-space;
       line-height: 1.7;
+      max-width: calc(100% - #{$status-width + $time-width + $col3-width + $col4-width + $actions-width + $intercol-space * 3});
     }
 
     .col3 {
-      width: 270px;
+      width: $col3-width;
+      min-width: $col3-width;
       line-height: 1.7;
-      color: $oc-gray-8;
+      color: colors.$oc-gray-8;
 
       .icon {
         margin-right: 5px;
@@ -110,9 +121,10 @@ $block-border-radius: 10px;
     }
 
     .col4 {
-      width: 120px;
+      width: $col4-width;
+      min-width: $col4-width;
       line-height: 1.7;
-      color: $oc-gray-8;
+      color: colors.$oc-gray-8;
 
       .icon {
         margin-right: 5px;
@@ -121,11 +133,12 @@ $block-border-radius: 10px;
     }
 
     .actions {
-      width: $summary-height;
+      width: $actions-width;
+      min-width: $actions-width;
 
       .switchy {
-        width: $summary-height;
-        height: $summary-height;
+        width: $actions-width;
+        height: $actions-width;
         cursor: pointer;
         stroke-width: 1;
         transition: color 0.2s, background-color 0.2s;
@@ -133,8 +146,15 @@ $block-border-radius: 10px;
       }
     }
 
+    .package-id {
+      @include utils.text-overflow-ellipsis;
+    }
+
     .repository {
-      color: $oc-gray-7;
+      display: inline-block;
+      text-decoration: none;
+      color: colors.$oc-gray-5;
+      @include utils.text-overflow-ellipsis;
 
       .country {
         width: 20px;
@@ -143,16 +163,21 @@ $block-border-radius: 10px;
         display: inline-block;
         border-radius: 2px;
         overflow: hidden;
-        background: $oc-gray-1;
+        background: colors.$oc-gray-1;
         vertical-align: middle;
         position: relative;
         top: -2px;
 
         img {
           vertical-align: top;
-          border: 1px solid $oc-gray-4;
+          border: 1px solid colors.$oc-gray-4;
           border-radius: 2px;
         }
+      }
+
+      span {
+        color: colors.$oc-gray-7;
+        @include utils.text-decoration;
       }
 
       span:nth-child(2) {
@@ -167,9 +192,7 @@ $block-border-radius: 10px;
 
     .branch {
       max-width: 100%;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
+      @include utils.text-overflow-ellipsis;
     }
 
     .request-rebuild {
@@ -180,19 +203,79 @@ $block-border-radius: 10px;
     .link-failure-logs {
       display: block;
     }
+
+    .link-failure-logs .icon {
+      color: colors.$oc-red-2;
+    }
   }
 
   .details {
     display: none;
-    border-top: 1px solid $oc-gray-2;
+    border-top: 1px solid colors.$oc-gray-2;
     margin-top: 10px;
     padding-top: 10px;
+    line-height: 1.7;
+
+    .col1 {
+      width: 80%;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .col2 {
+      width: 19%;
+      display: inline-block;
+    }
+
+    .name,
+    .title,
+    .url {
+      color: colors.$oc-gray-5;
+
+      span,
+      a {
+        color: colors.$oc-gray-7;
+        margin-left: 10px;
+
+        &:empty::after {
+          content: "no value";
+          color: colors.$oc-gray-5;
+          font-style: italic;
+        }
+      }
+    }
+
+    .fhir-version,
+    .error-count,
+    .warning-count,
+    .link-qa {
+
+      .icon {
+        margin-right: 5px;
+      }
+    }
+
+    .fhir-version .icon {
+      color: colors.$oc-blue-6;
+    }
+
+    .error-count .icon {
+      color: colors.$oc-red-5;
+    }
+
+    .warning-count .icon {
+      color: colors.$oc-yellow-5;
+    }
+
+    .link-qa .icon {
+      color: colors.$oc-gray-5;
+    }
   }
 
   .icon {
     width: 20px;
     height: 20px;
-    color: $oc-gray-3;
+    color: colors.$oc-gray-3;
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -205,6 +288,10 @@ $block-border-radius: 10px;
 
     .details {
       display: block;
+    }
+
+    .icon {
+      color: colors.$oc-gray-5;
     }
   }
 }

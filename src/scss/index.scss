@@ -1,6 +1,13 @@
-@import "sanitize";
-@import "colors";
-@import "font";
+@use "sanitize";
+@use "colors";
+@use "font";
+@use "utils";
+
+@use "header";
+@use "form";
+@use "logs";
+@use "footer";
+@use "notifications";
 
 html {
   font-size: 16px;
@@ -17,19 +24,21 @@ html {
 a,
 .clickable {
   cursor: pointer;
-  text-decoration: underline #88aac9;
-  text-decoration-skip: leading-spaces trailing-spaces objects;
+  @include utils.text-decoration;
 }
 
+
+@media screen and (max-width: 1300px) {
+  #main-width {
+    width: 90%;
+  }
+}
 
 @media screen and (max-width: 1000px) {
   html {
     font-size: 14px;
   }
+  #main-width {
+    width: 94%;
+  }
 }
-
-@import "header";
-@import "form";
-@import "logs";
-@import "footer";
-@import "notifications";

@@ -77,8 +77,10 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
 
         template.content.querySelector('.time')!.textContent = timeFormatter.format(log.date);
         template.content.querySelector('.time')!.setAttribute('title', mediumDateTimeFormatter.format(log.date));
-        template.content.querySelector('.name')!.textContent = log.name;
-        template.content.querySelector('.title')!.textContent = log.title;
+        template.content.querySelector('.name span')!.textContent = log.name;
+        template.content.querySelector('.title span')!.textContent = log.title;
+        template.content.querySelector('.url a')!.textContent = log.url;
+        template.content.querySelector('.url a')!.setAttribute("href", log.url);
         template.content.querySelector('.package-id')!.textContent = log.packageId;
         template.content.querySelector('.repository')!.setAttribute("href", log.repositoryUrl);
         const linkSpans = template.content.querySelectorAll('.repository span');
@@ -88,15 +90,19 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         template.content.querySelector('.branch')!.setAttribute('title', `Git branch: ${log.repositoryBranch}`);
         template.content.querySelector('.ig-version')!.appendChild(document.createTextNode(log.igVersion));
         template.content.querySelector('.fhir-version')!.appendChild(document.createTextNode(log.fhirVersion));
+        template.content.querySelector('.error-count')!.appendChild(document.createTextNode(`${log.errorCount} errors`));
+        template.content.querySelector('.warning-count')!.appendChild(document.createTextNode(`${log.warningCount} warnings`));
 
         if (log.buildStatus === 'error') {
             template.content.querySelector('.status')!.setAttribute('title', 'The build has failed');
             template.content.querySelector('.link-failure-logs')!.setAttribute('href', log.failureLogsUrl);
             template.content.querySelector('.link-preview')!.remove();
+            template.content.querySelector('.link-qa')!.remove();
         } else {
             template.content.querySelector('.status')!.setAttribute('title', 'The build has succeeded');
             template.content.querySelector('.link-failure-logs')!.remove();
             template.content.querySelector('.link-preview')!.setAttribute('href', log.baseBuildUrl);
+            template.content.querySelector('.link-qa')!.setAttribute('href', log.baseBuildUrl + 'qa.html');
         }
 
         if (log.country) {

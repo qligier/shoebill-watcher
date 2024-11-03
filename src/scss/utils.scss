@@ -1,0 +1,11 @@
+@mixin text-overflow-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@mixin text-decoration {
+  text-decoration: underline #88aac9;
+  text-decoration-skip: leading-spaces trailing-spaces objects;
+}

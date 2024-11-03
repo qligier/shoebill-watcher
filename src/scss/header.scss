@@ -1,4 +1,4 @@
-@import "colors";
+@use "colors";
 
 header {
   $logo-size: 100px;
@@ -16,31 +16,31 @@ header {
   h1 {
     display: inline-block;
     margin-left: 20px;
-    color: $oc-blue-9;
+    color: colors.$oc-blue-9;
     font-weight: 800;
   }
 
   #shoebill-version {
-    color: $oc-gray-6;
+    color: colors.$oc-gray-6;
     margin-left: 10px;
     font-size: 0.8rem;
   }
 
   div {
     float: right;
-    color: $oc-gray-4;
+    color: colors.$oc-gray-4;
     user-select: none;
   }
 
   #refresh-data,
   #request-new-build {
-    color: $oc-gray-7;
+    color: colors.$oc-gray-7;
     margin: 0 1.2em;
 
     svg {
       width: 26px;
       height: 26px;
-      color: $oc-gray-5;
+      color: colors.$oc-gray-5;
       margin-right: 5px;
       position: relative;
       top: -1px;

@@ -1,33 +1,35 @@
-@import "colors";
+@use "colors";
 
 #new-build-request {
   width: 100%;
   height: 0;
   opacity: 0;
-  transition: height 0.2s, opacity 0.2s;
-  background: $oc-gray-1;
+  transition: height 0.2s, opacity 0.2s, padding 0.2s, margin 0.2s;
+  background: colors.$oc-gray-1;
   border-radius: 10px;
-  padding: 1em 1em 0 1em;
+  padding: 0;
   overflow: hidden;
   box-sizing: border-box;
-  margin-bottom: 2em;
+  margin-bottom: 0;
 
   &.active {
     height: auto;
     visibility: visible;
     opacity: 1;
+    padding: 1em 1em 0 1em;
+    margin-bottom: 2em;
   }
 
   .icon.close {
     float: right;
-    color: $oc-gray-6;
+    color: colors.$oc-gray-6;
     width: 26px;
     height: 26px;
   }
 
   h3 {
-    margin: 0 0 1em 0;
-    color: $oc-gray-8;
+    margin: 0 26px 1em 0;
+    color: colors.$oc-gray-8;
   }
 
   div {
@@ -47,16 +49,16 @@
     background: #fff;
     padding: 0.5em;
     border-radius: 8px;
-    border: 1px solid $oc-gray-4;
+    border: 1px solid colors.$oc-gray-4;
 
     &:focus {
       outline: none;
-      border-color: $oc-blue-7;
+      border-color: colors.$oc-blue-7;
     }
   }
 
   span {
-    background: $oc-blue-8;
+    background: colors.$oc-blue-8;
     color: #fff;
     border-radius: 10px;
     cursor: pointer;
