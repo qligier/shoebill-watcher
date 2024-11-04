@@ -79,7 +79,7 @@ interface ApiResponseItem {
     repo: string;
 }
 
-export async function fetchIgBuildLogs(): Promise<Array<IgBuildLog>> {
+export async function fetchIgBuildLogs(): Promise<IgBuildLog[]> {
     const [succeededBuilds, failedBuilds] = await Promise.all([fetchSucceededBuilds(), fetchFailedBuilds()]);
     succeededBuilds.push(...failedBuilds.filter(log => log !== undefined));
 
@@ -88,9 +88,9 @@ export async function fetchIgBuildLogs(): Promise<Array<IgBuildLog>> {
     return succeededBuilds;
 }
 
-async function fetchSucceededBuilds(): Promise<Array<IgBuildLog>> {
+async function fetchSucceededBuilds(): Promise<IgBuildLog[]> {
     const response: Response = await fetch(qasFileUrl);
-    const data: Array<ApiResponseItem> = await response.json();
+    const data: ApiResponseItem[] = await response.json();
 
     const builds = new Array<IgBuildLog>(data.length);
     let i = 0;
@@ -129,7 +129,7 @@ async function fetchFailedBuilds(): Promise<Array<IgBuildLog | undefined>> {
     const failedIgs = allIgs
         .filter(ig => ig.includes('failure'))
         .map(ig => ig.replace('/build.log', '/sushi-config.yaml'));
-    const promises = failedIgs.map(async (ig) => {
+    const promises = failedIgs.map(async (ig): Promise<IgBuildLog | undefined> => {
         const response = await fetch(`https://build.fhir.org/ig/${ig}`);
         if (!response.ok) {
             // Here, we can try to fetch 'publication-request.json', which contains almost the same information.

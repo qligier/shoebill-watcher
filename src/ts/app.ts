@@ -3,7 +3,7 @@ import {domNodeDataRefresh, rebuildLogsInDom} from "./dom";
 import {notifyError} from "./notification";
 import {initRequestForm} from "./request-form";
 
-let allIgBuildLogs: Array<IgBuildLog> = [];
+let allIgBuildLogs: IgBuildLog[] = [];
 let fetchingData: boolean = false;
 
 const setFetchingData = (value: boolean) => {

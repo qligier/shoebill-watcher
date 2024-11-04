@@ -36,7 +36,7 @@ const requestRebuild = (targetLog: HTMLElement): void => {
     });
 }
 
-domNodeLogWrapper.addEventListener('click', (event: MouseEvent) => {
+domNodeLogWrapper.addEventListener('click', (event: MouseEvent): void => {
     if (event.target instanceof SVGElement) {
         if (event.target.matches('.switchy')) {
             // Toggle the details
@@ -53,8 +53,8 @@ domNodeLogWrapper.addEventListener('click', (event: MouseEvent) => {
     }
 });
 
-export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
-    const fragment = document.createDocumentFragment();
+export const rebuildLogsInDom = (logs: IgBuildLog[]): void => {
+    const fragment: DocumentFragment = document.createDocumentFragment();
 
     let currentDay: CurrentDay | null = null;
     for (const log of logs) {
@@ -83,7 +83,7 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
         template.content.querySelector('.url a')!.setAttribute("href", log.url);
         template.content.querySelector('.package-id')!.textContent = log.packageId;
         template.content.querySelector('.repository')!.setAttribute("href", log.repositoryUrl);
-        const linkSpans = template.content.querySelectorAll('.repository span');
+        const linkSpans: NodeListOf<Element> = template.content.querySelectorAll('.repository span');
         linkSpans[0]!.textContent = log.repositoryOwner;
         linkSpans[1]!.textContent = log.repositoryName;
         template.content.querySelector('.branch')!.appendChild(document.createTextNode(log.repositoryBranch));
@@ -102,18 +102,18 @@ export const rebuildLogsInDom = (logs: Array<IgBuildLog>) => {
             template.content.querySelector('.status')!.setAttribute('title', 'The build has succeeded');
             template.content.querySelector('.link-failure-logs')!.remove();
             template.content.querySelector('.link-preview')!.setAttribute('href', log.baseBuildUrl);
-            template.content.querySelector('.link-qa')!.setAttribute('href', log.baseBuildUrl + 'qa.html');
+            template.content.querySelector('.link-qa')!.setAttribute('href', log.qaUrl);
         }
 
         if (log.country) {
-            const img = document.createElement('img');
+            const img: HTMLImageElement = document.createElement('img');
             img.src = `images/flags/${log.country}.svg`;
             img.alt = `Country: ${log.country}`;
             img.title = img.alt;
             template.content.querySelector('.country')!.appendChild(img);
         }
 
-        const dataset = (template.content.querySelector('.log') as HTMLElement).dataset;
+        const dataset: DOMStringMap = (template.content.querySelector('.log') as HTMLElement).dataset;
         dataset['repoOwner'] = log.repositoryOwner;
         dataset['repoName'] = log.repositoryName;
         dataset['repoBranch'] = log.repositoryBranch;
