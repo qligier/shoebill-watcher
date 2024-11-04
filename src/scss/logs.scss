@@ -2,6 +2,8 @@
 @use "utils";
 
 $block-border-radius: 10px;
+$intercol-space: 10px;
+$status-width: 5px;
 
 .log-day-wrapper {
   display: flex;
@@ -58,10 +60,8 @@ $block-border-radius: 10px;
   }
 
   .summary {
-    $intercol-space: 10px;
     $summary-height: 50px;
 
-    $status-width: 5px;
     $time-width: 120px;
     $col2-width: 1fr;
     $col3-width: 270px;
@@ -320,19 +320,28 @@ $block-border-radius: 10px;
       $summary-height: 40px;
       height: $summary-height;
 
+      $time-width: 80px;
+      $col3-width: 170px;
+      $col4-width: 95px;
+      $actions-width: 30px;
+
+
       .time {
-        width: 80px;
+        width: $time-width;
+        min-width: $time-width;
         line-height: $summary-height;
         letter-spacing: revert;
         font-weight: 700;
       }
 
       .col2 {
+        max-width: calc(100% - #{$status-width + $time-width + $col3-width + $col4-width + $actions-width + $intercol-space * 3});
         line-height: 1.5;
       }
 
       .col3 {
-        width: 170px;
+        width: $col3-width;
+        min-width: $col3-width;
         line-height: 1.5;
 
         .icon {
@@ -341,7 +350,8 @@ $block-border-radius: 10px;
       }
 
       .col4 {
-        width: 95px;
+        width: $col4-width;
+        min-width: $col4-width;
         line-height: 1.5;
 
         .icon {
@@ -350,11 +360,12 @@ $block-border-radius: 10px;
       }
 
       .actions {
-        width: 30px;
+        width: $actions-width;
+        min-width: $actions-width;
 
         .switchy {
-          width: 30px;
-          height: 30px;
+          width: $actions-width;
+          height: $actions-width;
           margin-top: 5px;
         }
       }
