@@ -25,6 +25,7 @@ a,
 .clickable {
   cursor: pointer;
   @include utils.text-decoration;
+  color: inherit;
 }
 
 
