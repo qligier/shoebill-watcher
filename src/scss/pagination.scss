@@ -1,0 +1,42 @@
+@use 'colors';
+
+#pagination-wrapper {
+  display: block;
+  margin: 4em auto;
+  padding: 2em 0;
+  text-align: center;
+  border-top: 1px solid colors.$oc-gray-4;
+  border-bottom: 1px solid colors.$oc-gray-4;
+
+  li {
+    display: inline-block;
+
+    &.page {
+      padding: 4px 10px;
+      margin: 0 7px;
+      border-radius: 5px;
+    }
+
+    &.page.clickable {
+      border: 1px solid colors.$oc-gray-2;
+    }
+
+    &.page.current {
+      border: 1px solid colors.$oc-blue-2;
+      background: colors.$oc-blue-2;
+    }
+
+    &.ellipsis {
+      margin: 0 20px;
+      color: colors.$oc-gray-5;
+    }
+
+    &.previous {
+      margin-right: 20px;
+    }
+
+    &.next {
+      margin-left: 20px;
+    }
+  }
+}

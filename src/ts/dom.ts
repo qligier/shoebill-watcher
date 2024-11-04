@@ -7,23 +7,23 @@ import {
     mediumDateTimeFormatter,
     timeFormatter
 } from "./utils";
+import {
+    Pagination,
+    PaginationCurrentPage,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationNextPage,
+    PaginationPage,
+    PaginationPreviousPage
+} from "./pagination";
 
-const domNodeLogWrapper: HTMLElement | null = document.getElementById("log-wrapper");
-const domTemplateLogDay: HTMLElement | null = document.getElementById("log-day-template");
-const domTemplateLog: HTMLElement | null = document.getElementById("log-template");
+const domNodeLogWrapper: HTMLElement = document.getElementById("log-wrapper")!;
+const domTemplateLogDay: HTMLElement = document.getElementById("log-day-template")!;
+const domTemplateLog: HTMLElement = document.getElementById("log-template")!;
 export const domNodeDataRefresh: HTMLElement = document.getElementById("refresh-data")!;
 export const domTemplateNotification: HTMLTemplateElement = document.getElementById("notification-template") as HTMLTemplateElement;
 export const domNodeNotifications: HTMLElement = document.getElementById("notifications")!;
-
-if (!domNodeLogWrapper) {
-    throw new Error("Could not find the log wrapper element");
-}
-if (!domTemplateLogDay) {
-    throw new Error("Could not find the log-day template element");
-}
-if (!domTemplateLog) {
-    throw new Error("Could not find the log template element");
-}
+const domPaginationWrapper: HTMLElement = document.getElementById("pagination-wrapper")!;
 
 document.querySelector("#shoebill-version")!.textContent = packageJson.version;
 
@@ -149,3 +149,44 @@ class CurrentDay {
         this.logsWrapper.appendChild(fragment);
     }
 }
+
+export const buildPagination = (items: PaginationItem[], pagination: Pagination): void => {
+    domPaginationWrapper.innerHTML = '';
+
+    for (const item of items) {
+        const li: HTMLLIElement = document.createElement('li');
+        if (item instanceof PaginationEllipsis) {
+            li.classList.add('ellipsis');
+            li.textContent = '…';
+        } else if (item instanceof PaginationPage) {
+            li.classList.add('page', 'clickable');
+            li.textContent = item.page.toString();
+            li.onclick = () => {
+                pagination.page = item.page;
+                window.scroll(0, 0);
+            };
+            li.setAttribute('title', `Go to page ${item.page}`);
+        } else if (item instanceof PaginationCurrentPage) {
+            li.classList.add('page', 'current');
+            li.textContent = item.page.toString();
+            li.setAttribute('title', 'Current page');
+        } else if (item instanceof PaginationPreviousPage) {
+            li.classList.add('page', 'previous', 'clickable');
+            li.textContent = 'Previous';
+            li.onclick = () => {
+                pagination.page = item.page;
+                window.scroll(0, 0);
+            };
+            li.setAttribute('title', `Go to page ${item.page}`);
+        } else if (item instanceof PaginationNextPage) {
+            li.classList.add('page', 'next', 'clickable');
+            li.textContent = 'Next';
+            li.onclick = () => {
+                pagination.page = item.page;
+                window.scroll(0, 0);
+            };
+            li.setAttribute('title', `Go to page ${item.page}`);
+        }
+        domPaginationWrapper.appendChild(li);
+    }
+};
