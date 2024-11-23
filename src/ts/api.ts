@@ -95,24 +95,28 @@ async function fetchSucceededBuilds(): Promise<IgBuildLog[]> {
     const builds = new Array<IgBuildLog>(data.length);
     let i = 0;
     for (const row of data) {
-        const repoParts = row['repo'].split('/');
-        builds[i++] = new IgBuildLog(
-            row['name'] ?? '',
-            row['title'] ?? '',
-            row['description'] ?? '',
-            row['url'] ?? '',
-            row['package-id'] ?? '',
-            row['ig-ver'] ?? '',
-            parseDate(row['date'] ?? ''),
-            row['errs'] ?? 0,
-            row['warnings'] ?? 0,
-            row['hints'] ?? 0,
-            row['version'] ?? '',
-            repoParts[0]!,
-            repoParts[1]!,
-            repoParts[3]!,
-            true
-        );
+        try {
+            const repoParts = row['repo'].split('/');
+            builds[i++] = new IgBuildLog(
+                row['name'] ?? '',
+                row['title'] ?? '',
+                row['description'] ?? '',
+                row['url'] ?? '',
+                row['package-id'] ?? '',
+                row['ig-ver'] ?? '',
+                parseDate(row['date'] ?? ''),
+                row['errs'] ?? 0,
+                row['warnings'] ?? 0,
+                row['hints'] ?? 0,
+                row['version'] ?? '',
+                repoParts[0]!,
+                repoParts[1]!,
+                repoParts[3]!,
+                true
+            );
+        } catch (e) {
+            console.error('Failed parsing the API response to IgBuildLog', e);
+        }
     }
     return builds;
 }
@@ -137,29 +141,34 @@ async function fetchFailedBuilds(): Promise<Array<IgBuildLog | undefined>> {
             //   ('input/ch.fhir.ig.XXX.xml').
             return undefined;
         }
-        const yamlFile = await response.text();
-        const yaml: SushiConfig = YAML.parse(yamlFile, {uniqueKeys: false, strict: false, stringKeys: true});
+        try {
+            const yamlFile = await response.text();
+            const yaml: SushiConfig = YAML.parse(yamlFile, {uniqueKeys: false, strict: false, stringKeys: true});
 
-        const [owner, repo, , branch,] = ig.split('/');
-        const lastModified = response.headers.get('last-modified')!;
+            const [owner, repo, , branch,] = ig.split('/');
+            const lastModified = response.headers.get('last-modified')!;
 
-        return new IgBuildLog(
-            yaml['name'] ?? '',
-            yaml['title'] ?? '',
-            yaml['description'] ?? '',
-            yaml['canonical'] ?? '',
-            yaml['id'] ?? '',
-            yaml['version'] ?? '',
-            parseDate(lastModified),
-            1, // 1 fatal error
-            0,
-            0,
-            yaml['fhirVersion'] ?? '',
-            owner!,
-            repo!,
-            branch!,
-            false
-        );
+            return new IgBuildLog(
+                yaml['name'] ?? '',
+                yaml['title'] ?? '',
+                yaml['description'] ?? '',
+                yaml['canonical'] ?? '',
+                yaml['id'] ?? '',
+                yaml['version'] ?? '',
+                parseDate(lastModified),
+                1, // 1 fatal error
+                0,
+                0,
+                yaml['fhirVersion'] ?? '',
+                owner!,
+                repo!,
+                branch!,
+                false
+            );
+        } catch (e) {
+            console.error('Failed parsing the API response to IgBuildLog', e);
+            return undefined;
+        }
     });
 
     return Promise.all(promises);
