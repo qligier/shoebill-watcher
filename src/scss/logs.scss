@@ -156,7 +156,7 @@ $status-width: 5px;
       color: colors.$oc-gray-5;
       @include utils.text-overflow-ellipsis;
 
-      .country {
+      .flag {
         width: 20px;
         height: 15px;
         margin-right: 6px;

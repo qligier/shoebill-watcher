@@ -1,4 +1,4 @@
-import {Country, repoOwnersToCountries} from "./countries";
+import {FlagIcon, repoOwnersToFlags} from "./flags";
 import YAML from 'yaml';
 import {notifyError, notifySuccess} from "./notification";
 
@@ -31,9 +31,9 @@ export class IgBuildLog {
         return `https://github.com/${this.repositoryOwner}/${this.repositoryName}/tree/${this.repositoryBranch}`;
     }
 
-    get country(): Country | undefined {
-        if (this.repositoryOwner in repoOwnersToCountries) {
-            return repoOwnersToCountries[this.repositoryOwner];
+    get flag(): FlagIcon | undefined {
+        if (this.repositoryOwner in repoOwnersToFlags) {
+            return repoOwnersToFlags[this.repositoryOwner];
         }
         return undefined;
     }

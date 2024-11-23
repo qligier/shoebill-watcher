@@ -4,7 +4,7 @@
     "./src/ts/api.ts",
     "./src/ts/dom.ts",
     "./src/ts/utils.ts",
-    "./src/ts/countries.ts",
+    "./src/ts/flags.ts",
     "./src/ts/notification.ts",
     "./src/ts/request-form.ts",
   ],

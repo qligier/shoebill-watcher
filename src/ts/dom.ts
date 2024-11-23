@@ -105,12 +105,13 @@ export const rebuildLogsInDom = (logs: IgBuildLog[]): void => {
             template.content.querySelector('.link-qa')!.setAttribute('href', log.qaUrl);
         }
 
-        if (log.country) {
+        const flag = log.flag;
+        if (flag) {
             const img: HTMLImageElement = document.createElement('img');
-            img.src = `images/flags/${log.country}.svg`;
-            img.alt = `Country: ${log.country}`;
+            img.src = `images/flags/${flag}.svg`;
+            img.alt = `Flag: ${flag}`;
             img.title = img.alt;
-            template.content.querySelector('.country')!.appendChild(img);
+            template.content.querySelector('.flag')!.appendChild(img);
         }
 
         const dataset: DOMStringMap = (template.content.querySelector('.log') as HTMLElement).dataset;
