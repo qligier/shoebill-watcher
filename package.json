@@ -1,6 +1,6 @@
 {
   "name": "shoebill-watcher",
-  "version": "2024.11.03",
+  "version": "2024.11.23",
   "description": "A watcher for FHIR IG auto-builds",
   "private": true,
   "homepage": "https://github.com/qligier/shoebill-watcher",
