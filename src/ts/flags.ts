@@ -19,6 +19,7 @@ export enum FlagIcon {
     SriLanka = 'lk',
     Sweden = 'se',
     Switzerland = 'ch',
+    UnitedKingdom = 'gb',
     Vietnam = 'vn',
 
     // Then organizations
@@ -87,6 +88,8 @@ export const repoOwnersToFlags: { [key: string]: FlagIcon } = {
     'ehealthsuisse': FlagIcon.Switzerland,
     'CARA-ch': FlagIcon.Switzerland,
     'bag-epl': FlagIcon.Switzerland,
+
+    'HL7-UK': FlagIcon.UnitedKingdom,
 
     'PanAmericanHealthOrganization': FlagIcon.UnitedNations,
     'WorldHealthOrganization': FlagIcon.UnitedNations,
