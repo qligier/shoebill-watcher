@@ -108,11 +108,11 @@ export const rebuildLogsInDom = (logs: IgBuildLog[]): void => {
 
         const flag = log.flag;
         if (flag) {
-            const img: HTMLImageElement = document.createElement('img');
-            img.src = `images/flags/${flag}.svg`;
-            img.alt = `Flag: ${flag}`;
-            img.title = img.alt;
-            template.content.querySelector('.flag')!.appendChild(img);
+            template.content.querySelector('.flag')!.innerHTML =
+                `<svg xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>Flag: ${flag}</title>
+                    <use xlink:href="images/flags.svg#${flag}"></use>
+                </svg>`;
         }
 
         const dataset: DOMStringMap = (template.content.querySelector('.log') as HTMLElement).dataset;
