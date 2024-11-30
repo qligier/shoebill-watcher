@@ -24,6 +24,7 @@ export const domNodeDataRefresh: HTMLElement = document.getElementById("refresh-
 export const domTemplateNotification: HTMLTemplateElement = document.getElementById("notification-template") as HTMLTemplateElement;
 export const domNodeNotifications: HTMLElement = document.getElementById("notifications")!;
 const domPaginationWrapper: HTMLElement = document.getElementById("pagination-wrapper")!;
+export const domNodeInputFilter: HTMLInputElement = document.getElementById("search-input") as HTMLInputElement;
 
 document.querySelector("#shoebill-version")!.textContent = packageJson.version;
 

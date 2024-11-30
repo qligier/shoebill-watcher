@@ -67,4 +67,31 @@ header {
       }
     }
   }
+
+  .search {
+    position: relative;
+    line-height: normal;
+
+    svg {
+      height: 20px;
+      width: 20px;
+      color: colors.$oc-gray-6;
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+
+    input {
+      border: 1px solid colors.$oc-gray-2;
+      padding: 8px 8px 8px 34px;
+      border-radius: 20px;
+      width: 20rem;
+
+      &:focus {
+        border-color: colors.$oc-blue-5;
+      }
+    }
+  }
 }

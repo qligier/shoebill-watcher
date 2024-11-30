@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="user-search" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
+    <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5"/>
+    <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
+    <path d="M20.2 20.2l1.8 1.8"/>
+  </symbol>
   <symbol id="git-merge" viewBox="0 0 24 24" fill="none" stroke="currentColor">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
     <path d="M7 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/>
@@ -76,5 +84,15 @@
     <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"/>
     <path d="M9 12h6"/>
     <path d="M9 16h6"/>
+  </symbol>
+  <symbol id="search" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z"/>
+    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+    <path d="M21 21l-6 -6"/>
+  </symbol>
+  <symbol id="search-off" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke="none" d="M0 0h24v24H0z"/>
+    <path d="M5.039 5.062a7 7 0 0 0 9.91 9.89m1.584 -2.434a7 7 0 0 0 -9.038 -9.057"/>
+    <path d="M3 3l18 18"/>
   </symbol>
 </svg>

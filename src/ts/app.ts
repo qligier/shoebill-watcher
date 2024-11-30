@@ -1,8 +1,9 @@
 import {fetchIgBuildLogs, IgBuildLog} from "./api";
-import {buildPagination, domNodeDataRefresh, rebuildLogsInDom} from "./dom";
+import {buildPagination, domNodeDataRefresh, domNodeInputFilter, rebuildLogsInDom} from "./dom";
 import {notifyError} from "./notification";
 import {initRequestForm} from "./request-form";
 import {Pagination} from "./pagination";
+import {debounce} from "./utils";
 
 let allIgBuildLogs: IgBuildLog[] = [];
 let fetchingData: boolean = false;
@@ -18,6 +19,22 @@ const setFetchingData = (value: boolean) => {
     }
 }
 
+const filterLogs: () => void = () => {
+    if (allIgBuildLogs.length === 0) {
+        pagination.logs = [];
+        return;
+    }
+    const filter = domNodeInputFilter.value.toLowerCase();
+    pagination.logs = allIgBuildLogs.filter((log: IgBuildLog) => {
+        return log.name.toLowerCase().includes(filter)
+            || log.title.toLowerCase().includes(filter)
+            || log.packageId.toLowerCase().includes(filter)
+            || log.repositoryOwner.toLowerCase().includes(filter)
+            || log.repositoryName.toLowerCase().includes(filter)
+            || log.repositoryBranch.toLowerCase().includes(filter);
+    });
+}
+
 const refreshLogs: () => Promise<void> = async () => {
     if (fetchingData) {
         return;
@@ -27,7 +44,7 @@ const refreshLogs: () => Promise<void> = async () => {
     try {
         allIgBuildLogs = await fetchIgBuildLogs();
         // Sort and filter if necessary
-        pagination.logs = allIgBuildLogs;
+        filterLogs();
     } catch (e: unknown) {
         if (e instanceof Error) {
             notifyError('Failed to fetch logs', e);
@@ -43,3 +60,4 @@ initRequestForm();
 refreshLogs().then(() => {
 });
 document.getElementById('refresh-data')!.addEventListener('click', refreshLogs);
+domNodeInputFilter.addEventListener('input', () => debounce(filterLogs, 600)());
