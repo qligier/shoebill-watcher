@@ -12,7 +12,8 @@
     "build-js": "tsc -noEmit && esbuild src/ts/app.ts --bundle --minify --tree-shaking=true --target=es2022 --outfile=dist/app.js",
     "build-css": "sass --no-source-map --style=compressed --color src/scss/index.scss dist/style.css",
     "build-static": "cp -R ./static/* ./dist",
-    "build-static:windows": "xcopy /E /Y /I static dist"
+    "build-static:windows": "xcopy /E /Y /I static dist",
+    "optimize-svg": "svgo --config=svgo.config.js --input static/images/favicon.svg --input static/images/flags.svg --input static/images/icons.svg --input static/images/logo.svg --output dist/images/"
   },
   "author": {
     "name": "Quentin Ligier",
@@ -25,6 +26,7 @@
     "eslint": "^9.15.0",
     "globals": "^15.12.0",
     "sass-embedded": "^1.81.0",
+    "svgo": "^3.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.15.0"

@@ -25,7 +25,8 @@ const isWindows = /^win/.test(process.platform);
 const npmCommand = isWindows ? 'npm.cmd' : 'npm';
 const cssBuildPromise = spawnProcess(npmCommand, ['run', 'build-css']);
 const jsBuildPromise = spawnProcess(npmCommand, ['run', 'build-js']);
-const jsCopyStatic = spawnProcess(npmCommand, ['run', isWindows ? 'build-static:windows' : 'build-static']);
+const jsCopyStaticPromise = spawnProcess(npmCommand, ['run', isWindows ? 'build-static:windows' : 'build-static']);
+const optimizeSvgPromise = spawnProcess(npmCommand, ['run', 'optimize-svg']);
 
-Promise.all([cssBuildPromise, jsBuildPromise, jsCopyStatic]).then(() => {
+Promise.all([cssBuildPromise, jsBuildPromise, jsCopyStaticPromise, optimizeSvgPromise]).then(() => {
 });
