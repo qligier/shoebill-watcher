@@ -15,10 +15,12 @@ export enum FlagIcon {
     Italy = 'it',
     Netherlands = 'nl',
     NewZealand = 'nz',
+    Philippines = 'ph',
     Portugal = 'pt',
     SriLanka = 'lk',
     Sweden = 'se',
     Switzerland = 'ch',
+    Taiwan = 'tw',
     UnitedKingdom = 'gb',
     Vietnam = 'vn',
 
@@ -77,6 +79,8 @@ export const repoOwnersToFlags: { [key: string]: FlagIcon } = {
     'HL7NZ': FlagIcon.NewZealand,
     'tewhatuora': FlagIcon.NewZealand,
 
+    'UP-Manila-SILab': FlagIcon.Philippines,
+
     'hl7-pt': FlagIcon.Portugal,
 
     'lk-gov-health-hiu': FlagIcon.SriLanka,
@@ -89,10 +93,14 @@ export const repoOwnersToFlags: { [key: string]: FlagIcon } = {
     'CARA-ch': FlagIcon.Switzerland,
     'bag-epl': FlagIcon.Switzerland,
 
+    'TWNHIFHIR': FlagIcon.Taiwan,
+
     'HL7-UK': FlagIcon.UnitedKingdom,
+    'Interop-NWEngland': FlagIcon.UnitedKingdom,
 
     'PanAmericanHealthOrganization': FlagIcon.UnitedNations,
     'WorldHealthOrganization': FlagIcon.UnitedNations,
+    'Uppsala-Monitoring-Centre': FlagIcon.UnitedNations,
 
     'hl7vn': FlagIcon.Vietnam,
 }
