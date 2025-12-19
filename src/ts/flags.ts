@@ -93,7 +93,7 @@ export const repoOwnersToFlags: { [key: string]: FlagIcon } = {
     'SanteonNL': FlagIcon.Netherlands,
     'IKNL': FlagIcon.Netherlands,
 
-    'HL7NZ': FlagIcon.NewZealand,
+    'hl7nz': FlagIcon.NewZealand,
     'tewhatuora': FlagIcon.NewZealand,
 
     'Nigeria-FHIR-Community': FlagIcon.Nigeria,
