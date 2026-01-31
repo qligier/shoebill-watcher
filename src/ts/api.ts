@@ -90,6 +90,10 @@ export async function fetchIgBuildLogs(): Promise<IgBuildLog[]> {
 
 async function fetchSucceededBuilds(): Promise<IgBuildLog[]> {
     const response: Response = await fetch(qasFileUrl);
+    if (!response.ok) {
+        notifyError('Failed to fetch builds', `The server returned ${response.status} ${response.statusText}`);
+        return [];
+    }
     const data: ApiResponseItem[] = await response.json();
 
     const builds = new Array<IgBuildLog>(data.length);
@@ -129,6 +133,11 @@ async function fetchSucceededBuilds(): Promise<IgBuildLog[]> {
  */
 async function fetchFailedBuilds(): Promise<Array<IgBuildLog | undefined>> {
     const response: Response = await fetch(buildsFileUrl);
+    if (!response.ok) {
+        notifyError('Failed to fetch failed builds', `The server returned ${response.status} ${response.statusText}`);
+        return [];
+    }
+
     const allIgs = await response.json() as string[];
     const failedIgs = allIgs
         .filter(ig => ig.includes('failure'))
@@ -176,7 +185,7 @@ async function fetchFailedBuilds(): Promise<Array<IgBuildLog | undefined>> {
 
 // https://github.com/FHIR/auto-ig-builder
 export async function requestIgBuild(repoOwner: string, repoName: string, branch: string): Promise<void> {
-    const response = await fetch(igBuildRequestUrl, {
+    const response: Response = await fetch(igBuildRequestUrl, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -188,6 +197,10 @@ export async function requestIgBuild(repoOwner: string, repoName: string, branch
             }
         })
     });
+    if (!response.ok) {
+        notifyError('Failed to request build', `The server returned ${response.status} ${response.statusText}`);
+        return;
+    }
     const json = await response.json();
     if ('created' in json && !json['created']) {
         if ('reason' in json) {
